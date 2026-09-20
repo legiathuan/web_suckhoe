@@ -1,0 +1,1717 @@
+<!doctype html>
+
+<html lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./tu_van.css" />
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="./supabaseClient.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-variant": "#e1e3e4",
+                            tertiary: "#00665d",
+                            "tertiary-fixed": "#61f9e9",
+                            "surface-container": "#edeeef",
+                            "on-secondary-fixed-variant": "#00522d",
+                            "on-error-container": "#93000a",
+                            "primary-fixed": "#93f2f2",
+                            "on-primary-container": "#e3fffe",
+                            "on-surface": "#191c1d",
+                            "surface-dim": "#d9dadb",
+                            "on-surface-variant": "#3e4949",
+                            "on-secondary-fixed": "#00210f",
+                            "tertiary-fixed-dim": "#3adccc",
+                            "secondary-fixed": "#9af6b8",
+                            "outline-variant": "#bdc9c8",
+                            "on-tertiary-fixed": "#00201d",
+                            "tertiary-container": "#008177",
+                            "on-primary-fixed": "#002020",
+                            "on-background": "#191c1d",
+                            "on-tertiary-fixed-variant": "#005049",
+                            "surface-bright": "#f8f9fa",
+                            "on-primary": "#ffffff",
+                            surface: "#f8f9fa",
+                            error: "#ba1a1a",
+                            outline: "#6e7979",
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#76d6d5",
+                            "on-primary-fixed-variant": "#004f4f",
+                            "inverse-on-surface": "#f0f1f2",
+                            "on-tertiary": "#ffffff",
+                            "secondary-fixed-dim": "#7ed99e",
+                            "surface-container-high": "#e7e8e9",
+                            "surface-container-low": "#f3f4f5",
+                            background: "#f8f9fa",
+                            "on-secondary-container": "#047240",
+                            "surface-container-lowest": "#ffffff",
+                            "on-error": "#ffffff",
+                            primary: "#006565",
+                            "error-container": "#ffdad6",
+                            "inverse-primary": "#76d6d5",
+                            secondary: "#006d3d",
+                            "surface-tint": "#006a6a",
+                            "surface-container-highest": "#e1e3e4",
+                            "inverse-surface": "#2e3132",
+                            "primary-container": "#008080",
+                            "on-tertiary-container": "#e5fffa",
+                            "secondary-container": "#97f3b5",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            gutter: "1.5rem",
+                            "space-xl": "2.5rem",
+                            "space-sm": "0.5rem",
+                            "space-lg": "1.5rem",
+                            margin: "2rem",
+                            "space-md": "1rem",
+                            "space-xs": "0.25rem",
+                        },
+                        fontFamily: {
+                            "body-sm": ["Inter"],
+                            "label-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "headline-xl": ["Inter"],
+                            "headline-md": ["Inter"],
+                        },
+                        fontSize: {
+                            "body-sm": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "400" },
+                            ],
+                            "label-md": [
+                                "12px",
+                                { lineHeight: "16px", fontWeight: "500" },
+                            ],
+                            "body-lg": [
+                                "18px",
+                                { lineHeight: "28px", fontWeight: "400" },
+                            ],
+                            "headline-sm": [
+                                "20px",
+                                { lineHeight: "28px", fontWeight: "600" },
+                            ],
+                            "headline-lg": [
+                                "32px",
+                                { lineHeight: "40px", fontWeight: "600" },
+                            ],
+                            "label-lg": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "500" },
+                            ],
+                            "body-md": [
+                                "16px",
+                                { lineHeight: "24px", fontWeight: "400" },
+                            ],
+                            "headline-xl": [
+                                "40px",
+                                { lineHeight: "48px", fontWeight: "700" },
+                            ],
+                            "headline-md": [
+                                "24px",
+                                { lineHeight: "32px", fontWeight: "600" },
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body class="bg-background font-body-md text-on-surface antialiased">
+        <aside
+            class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"
+        >
+            <div class="flex flex-col">
+                <div class="h-16 px-space-lg flex items-center gap-space-sm">
+                    <img
+                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
+                        class="h-8 w-auto object-contain"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                    />
+                    <div class="flex flex-col">
+                        <span
+                            class="font-headline-sm text-headline-sm text-primary leading-none"
+                            >Green Health</span
+                        ><span class="font-label-md text-label-md text-outline"
+                            >VitaFlow Platform</span
+                        >
+                    </div>
+                </div>
+                <div class="px-space-md py-space-sm">
+                    <div
+                        class="px-space-sm py-space-xs mb-space-xs font-label-md text-label-md text-outline uppercase tracking-wider"
+                    >
+                        Chức năng chính
+                    </div>
+                    <nav
+                        class="flex flex-col gap-space-xs"
+                        data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl"
+                    >
+                        <a
+                            aria-current="page"
+                            class="px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl"
+                            data-path="overview"
+                            href="tong_quan_skhoe.html"
+                            >Tổng quan Sức khỏe</a
+                        ><a
+                            class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="food-log"
+                            href="nhat_ky.html"
+                            >Nhật ký &amp; AI Food Log</a
+                        ><a
+                            class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="meal-plan"
+                            href="thucdon.html"
+                            >Thực đơn &amp; Kế hoạch</a
+                        ><a
+                            class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="expert"
+                            href="tu_van_chuyen_gia.html"
+                            >Tư vấn Chuyên gia</a
+                        ><a
+                            class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="food-admin"
+                            href="quan_tri_thuc_pham.html"
+                            >Quản trị Thực phẩm</a
+                        >
+                    </nav>
+                </div>
+            </div>
+            <div
+                class="p-space-md bg-surface-container-low m-space-md rounded-xl flex flex-col gap-space-xs"
+            >
+                <div class="flex items-center justify-between">
+                    <span
+                        class="font-label-md text-label-md text-on-surface-variant"
+                        >Mục tiêu calo hôm nay</span
+                    ><span
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        >1,450 / 2,000 kcal</span
+                    >
+                </div>
+                <div
+                    class="w-full bg-surface-variant h-2 rounded-full overflow-hidden"
+                >
+                    <div
+                        class="bg-primary-container h-full rounded-full w-[72%]"
+                    ></div>
+                </div>
+            </div>
+        </aside>
+        <div class="pl-72">
+            <header
+                class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"
+            >
+                <div class="flex items-center gap-space-md">
+                    <span
+                        class="font-headline-sm text-headline-sm text-on-surface"
+                        >Hệ sinh thái Sức khỏe Toàn diện</span
+                    >
+                </div>
+                <div class="flex items-center gap-space-lg">
+                    <div
+                        class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md"
+                    >
+                        <span class="material-symbols-outlined text-base"
+                            >vital_signs</span
+                        ><span>TDEE: 2,150 kcal • BMI: 21.8</span>
+                    </div>
+                    <button
+                        class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center"
+                    >
+                        <span class="material-symbols-outlined"
+                            >notifications</span
+                        ><span
+                            class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
+                        ></span>
+                    </button>
+                    <div class="flex items-center gap-space-sm pl-space-sm" id="user-profile-header">
+                        <div
+                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden"
+                            id="user-avatar-container"
+                        >
+                            <span
+                                class="material-symbols-outlined text-on-primary text-[18px]"
+                                >person</span
+                            >
+                        </div>
+                        <div class="hidden sm:flex flex-col">
+                            <span
+                                class="font-label-lg text-label-lg text-on-surface leading-tight"
+                                id="user-display-name"
+                                >Nguyễn Minh Anh</span
+                            ><span
+                                class="font-label-md text-label-md text-on-surface-variant leading-tight"
+                                id="user-role-badge"
+                                >Người dùng đã xác thực</span
+                            >
+                        </div>
+                        <button
+                            onclick="window.APP_SUPABASE.signOutUser()"
+                            class="ml-2 p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/30 transition-colors"
+                            title="Đăng xuất"
+                        >
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <main
+                class="relative pt-16 w-full bg-background min-h-screen px-space-lg py-space-lg"
+            >
+                <div class="flex flex-col w-full gap-space-lg">
+                    <!-- Top Navigation & Action Banner -->
+                    <div
+                        class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md"
+                    >
+                        <div class="flex flex-col">
+                            <div
+                                class="flex items-center gap-space-xs text-primary font-label-md text-label-md"
+                            >
+                                <span
+                                    class="material-symbols-outlined text-[16px]"
+                                    >verified_user</span
+                                >
+                                <span
+                                    >HỒ SƠ Y KHOA ĐIỆN TỬ • MÃ BN:
+                                    GH-88492</span
+                                >
+                            </div>
+                            <h1
+                                class="font-headline-lg text-headline-lg text-on-surface tracking-tight"
+                            >
+                                Tổng quan Sức khỏe Toàn diện
+                            </h1>
+                            <p
+                                class="font-body-md text-body-md text-on-surface-variant"
+                            >
+                                Báo cáo phân tích sinh hiệu, xu hướng thể trạng
+                                và đề xuất phục hồi theo tuần
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-space-sm">
+                            <div class="relative">
+                                <button
+                                    class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container-lowest rounded-xl shadow-sm text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
+                                    id="periodSelectBtn"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[20px]"
+                                        >calendar_today</span
+                                    >
+                                    <span>7 ngày gần nhất</span>
+                                    <span
+                                        class="material-symbols-outlined text-[18px] text-outline"
+                                        >expand_more</span
+                                    >
+                                </button>
+                            </div>
+                            <button
+                                class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container-high rounded-xl text-on-surface font-label-lg text-label-lg hover:bg-surface-variant transition-colors shadow-sm"
+                            >
+                                <span
+                                    class="material-symbols-outlined text-[20px] text-tertiary"
+                                    >download</span
+                                >
+                                <span>Xuất báo cáo Y khoa (PDF)</span>
+                            </button>
+                            <button
+                                class="flex items-center gap-space-xs px-space-md py-space-sm bg-primary text-on-primary rounded-xl font-label-lg text-label-lg hover:bg-primary-container shadow-md transition-all"
+                            >
+                                <span
+                                    class="material-symbols-outlined text-[20px]"
+                                    >add_circle</span
+                                >
+                                <span>+ Cập nhật chỉ số hôm nay</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- KPI Metric Cards Grid (4 columns) -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md"
+                    >
+                        <!-- Card 1: Thể trạng & Cân nặng -->
+                        <div
+                            class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div
+                                class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"
+                            ></div>
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="font-label-md text-label-md uppercase tracking-wider text-outline"
+                                        >Thể trạng &amp; Cân nặng</span
+                                    >
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[20px]"
+                                            >monitor_weight</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-space-sm flex items-baseline gap-space-xs"
+                                >
+                                    <span
+                                        class="font-headline-xl text-headline-xl text-on-surface tracking-tight"
+                                        >65.4</span
+                                    >
+                                    <span
+                                        class="font-body-md text-body-md text-on-surface-variant"
+                                        >kg</span
+                                    >
+                                    <span
+                                        class="ml-auto inline-flex items-center text-secondary font-label-md text-label-md bg-secondary-container/40 px-2 py-0.5 rounded-full"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[14px]"
+                                            >trending_down</span
+                                        >
+                                        -0.3 kg
+                                    </span>
+                                </div>
+                                <div
+                                    class="mt-space-xs flex items-center gap-space-xs font-body-sm text-body-sm text-outline"
+                                >
+                                    <span>Mục tiêu: 63.0 kg</span>
+                                    <span>•</span>
+                                    <span class="text-primary font-medium"
+                                        >Đạt 65%</span
+                                    >
+                                </div>
+                            </div>
+                            <div
+                                class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between"
+                            >
+                                <div class="flex items-center gap-space-xs">
+                                    <span
+                                        class="font-label-md text-label-md text-on-surface-variant"
+                                        >Chỉ số BMI:</span
+                                    >
+                                    <span
+                                        class="font-label-lg text-label-lg font-semibold text-primary"
+                                        >21.8</span
+                                    >
+                                </div>
+                                <span
+                                    class="text-[11px] font-label-md uppercase bg-secondary text-on-secondary px-2 py-0.5 rounded-full tracking-wider"
+                                    >Chuẩn WHO</span
+                                >
+                            </div>
+                        </div>
+                        <!-- Card 2: Năng lượng & Calo -->
+                        <div
+                            class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div
+                                class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full blur-xl pointer-events-none"
+                            ></div>
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="font-label-md text-label-md uppercase tracking-wider text-outline"
+                                        >Năng lượng nạp &amp; Đốt</span
+                                    >
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[20px]"
+                                            >local_fire_department</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-space-sm flex items-baseline gap-space-xs"
+                                >
+                                    <span
+                                        class="font-headline-xl text-headline-xl text-on-surface tracking-tight"
+                                        >1,450</span
+                                    >
+                                    <span
+                                        class="font-body-md text-body-md text-on-surface-variant"
+                                        >/ 2,150 kcal</span
+                                    >
+                                </div>
+                                <div
+                                    class="mt-space-xs flex items-center justify-between font-body-sm text-body-sm"
+                                >
+                                    <span
+                                        class="text-secondary font-medium flex items-center gap-1"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[15px]"
+                                            >check_circle</span
+                                        >
+                                        Thâm hụt 700 kcal
+                                    </span>
+                                    <span class="text-outline"
+                                        >67% mức nạp</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="mt-space-md">
+                                <div
+                                    class="w-full bg-surface-variant h-2 rounded-full overflow-hidden"
+                                >
+                                    <div
+                                        class="bg-primary h-full rounded-full w-[67%] transition-all duration-500"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="mt-space-xs flex justify-between font-label-md text-label-md text-on-surface-variant"
+                                >
+                                    <span>Đốt cháy TDEE: 2,150</span>
+                                    <span class="text-secondary"
+                                        >Thâm hụt chuẩn y tế</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3: Tim mạch & Huyết áp -->
+                        <div
+                            class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div
+                                class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full blur-xl pointer-events-none"
+                            ></div>
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="font-label-md text-label-md uppercase tracking-wider text-outline"
+                                        >Sinh hiệu Tim mạch</span
+                                    >
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[20px]"
+                                            >favorite</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-space-sm flex items-baseline gap-space-xs"
+                                >
+                                    <span
+                                        class="font-headline-xl text-headline-xl text-on-surface tracking-tight"
+                                        >68</span
+                                    >
+                                    <span
+                                        class="font-body-md text-body-md text-on-surface-variant"
+                                        >bpm</span
+                                    >
+                                    <span
+                                        class="ml-auto text-primary font-label-md text-label-md bg-primary-fixed/40 px-2 py-0.5 rounded-full"
+                                    >
+                                        Khi nghỉ ngơi
+                                    </span>
+                                </div>
+                                <div
+                                    class="mt-space-xs flex items-center gap-space-xs font-body-sm text-body-sm text-outline"
+                                >
+                                    <span class="text-secondary font-medium"
+                                        >Nhịp tim đều đặn</span
+                                    >
+                                    <span>•</span>
+                                    <span>Biên độ 62 - 76</span>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between"
+                            >
+                                <div class="flex flex-col">
+                                    <span
+                                        class="font-label-md text-label-md text-on-surface-variant"
+                                        >Huyết áp nghỉ:</span
+                                    >
+                                    <span
+                                        class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                        >118/76 mmHg</span
+                                    >
+                                </div>
+                                <span
+                                    class="text-[11px] font-label-md uppercase bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded-full tracking-wider font-semibold"
+                                    >Tối ưu</span
+                                >
+                            </div>
+                        </div>
+                        <!-- Card 4: Điểm số Phục hồi & Giấc ngủ -->
+                        <div
+                            class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div
+                                class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"
+                            ></div>
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="font-label-md text-label-md uppercase tracking-wider text-outline"
+                                        >Điểm phục hồi (HRV)</span
+                                    >
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[20px]"
+                                            >bedtime</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-space-sm flex items-baseline gap-space-xs"
+                                >
+                                    <span
+                                        class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight"
+                                        >88</span
+                                    >
+                                    <span
+                                        class="font-headline-sm text-headline-sm text-outline"
+                                        >/100</span
+                                    >
+                                    <span
+                                        class="ml-auto text-secondary font-label-md text-label-md bg-secondary-container/40 px-2 py-0.5 rounded-full font-medium"
+                                    >
+                                        Rất Tốt
+                                    </span>
+                                </div>
+                                <div
+                                    class="mt-space-xs flex items-center gap-space-xs font-body-sm text-body-sm text-outline"
+                                >
+                                    <span>Thời lượng: 7h 45m</span>
+                                    <span>•</span>
+                                    <span class="text-on-surface font-medium"
+                                        >REM 22%</span
+                                    >
+                                </div>
+                            </div>
+                            <div
+                                class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between"
+                            >
+                                <span
+                                    class="font-label-md text-label-md text-on-surface-variant"
+                                    >Sẵn sàng vận động:</span
+                                >
+                                <div
+                                    class="flex items-center gap-1 text-secondary font-label-md text-label-md font-semibold"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-[16px]"
+                                        >bolt</span
+                                    >
+                                    <span>Cao (Peak Status)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Center Analytical Section: 2 Columns (8 / 4 on desktop) -->
+                    <div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+                        <!-- Left Column: Primary Chart & Deep Diagnostics -->
+                        <div class="xl:col-span-8 flex flex-col gap-space-md">
+                            <!-- Main Chart Card -->
+                            <div
+                                class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md"
+                            >
+                                <div
+                                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm border-b-0 pb-2"
+                                >
+                                    <div>
+                                        <span
+                                            class="font-label-md text-label-md uppercase text-outline tracking-wider"
+                                            >Đồ thị Phân tích Đa chiều</span
+                                        >
+                                        <h2
+                                            class="font-headline-sm text-headline-sm text-on-surface"
+                                        >
+                                            Xu hướng Cân nặng &amp; Thâm hụt
+                                            Calo Tuần
+                                        </h2>
+                                    </div>
+                                    <div
+                                        class="inline-flex p-1 bg-surface-container-high rounded-xl"
+                                    >
+                                        <button
+                                            class="px-space-md py-1 rounded-lg bg-surface-container-lowest text-primary font-label-lg text-label-lg shadow-sm font-semibold"
+                                        >
+                                            Theo dõi Cân nặng
+                                        </button>
+                                        <button
+                                            class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors"
+                                        >
+                                            Calo &amp; Macro
+                                        </button>
+                                        <button
+                                            class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors"
+                                        >
+                                            Thời lượng Ngủ
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Metric Legends -->
+                                <div
+                                    class="flex flex-wrap items-center gap-space-md font-label-md text-label-md text-on-surface-variant"
+                                >
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="w-3 h-3 rounded bg-primary"
+                                        ></span>
+                                        <span>Năng lượng nạp (kcal)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="w-3 h-3 rounded bg-secondary-fixed-dim"
+                                        ></span>
+                                        <span
+                                            >Mức tiêu thụ TDEE (2,150
+                                            kcal)</span
+                                        >
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="w-6 h-0.5 bg-tertiary"
+                                        ></span>
+                                        <span>Đường Cân nặng thực tế (kg)</span>
+                                    </div>
+                                </div>
+                                <!-- SVG Trend Chart (Custom crisp vector under 2KB) -->
+                                <div
+                                    class="relative w-full h-72 bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-end"
+                                >
+                                    <svg
+                                        class="w-full h-full"
+                                        fill="none"
+                                        preserveaspectratio="none"
+                                        viewbox="0 0 700 240"
+                                    >
+                                        <!-- Grid Lines -->
+                                        <line
+                                            stroke="#edeeef"
+                                            stroke-dasharray="4 4"
+                                            stroke-width="1"
+                                            x1="40"
+                                            x2="680"
+                                            y1="30"
+                                            y2="30"
+                                        ></line>
+                                        <line
+                                            stroke="#edeeef"
+                                            stroke-dasharray="4 4"
+                                            stroke-width="1"
+                                            x1="40"
+                                            x2="680"
+                                            y1="90"
+                                            y2="90"
+                                        ></line>
+                                        <line
+                                            stroke="#edeeef"
+                                            stroke-dasharray="4 4"
+                                            stroke-width="1"
+                                            x1="40"
+                                            x2="680"
+                                            y1="150"
+                                            y2="150"
+                                        ></line>
+                                        <line
+                                            stroke="#e1e3e4"
+                                            stroke-width="1.5"
+                                            x1="40"
+                                            x2="680"
+                                            y1="210"
+                                            y2="210"
+                                        ></line>
+                                        <!-- Y Axis Labels -->
+                                        <text
+                                            fill="#6e7979"
+                                            font-family="Inter"
+                                            font-size="11"
+                                            x="5"
+                                            y="34"
+                                        >
+                                            2400
+                                        </text>
+                                        <text
+                                            fill="#6e7979"
+                                            font-family="Inter"
+                                            font-size="11"
+                                            x="5"
+                                            y="94"
+                                        >
+                                            1800
+                                        </text>
+                                        <text
+                                            fill="#6e7979"
+                                            font-family="Inter"
+                                            font-size="11"
+                                            x="5"
+                                            y="154"
+                                        >
+                                            1200
+                                        </text>
+                                        <text
+                                            fill="#6e7979"
+                                            font-family="Inter"
+                                            font-size="11"
+                                            x="5"
+                                            y="214"
+                                        >
+                                            600
+                                        </text>
+                                        <!-- TDEE Target Threshold Line -->
+                                        <line
+                                            stroke="#9af6b8"
+                                            stroke-dasharray="6 6"
+                                            stroke-width="2"
+                                            x1="40"
+                                            x2="680"
+                                            y1="55"
+                                            y2="55"
+                                        ></line>
+                                        <!-- Day 1: T2 (x=80) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="105"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="68"
+                                            y="105"
+                                        ></rect>
+                                        <!-- Day 2: T3 (x=170) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="115"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="158"
+                                            y="95"
+                                        ></rect>
+                                        <!-- Day 3: T4 (x=260) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="98"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="248"
+                                            y="112"
+                                        ></rect>
+                                        <!-- Day 4: T5 (x=350) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="125"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="338"
+                                            y="85"
+                                        ></rect>
+                                        <!-- Day 5: T6 (x=440) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="110"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="428"
+                                            y="100"
+                                        ></rect>
+                                        <!-- Day 6: T7 (x=530) -->
+                                        <rect
+                                            fill="#006565"
+                                            height="90"
+                                            opacity="0.85"
+                                            rx="4"
+                                            width="24"
+                                            x="518"
+                                            y="120"
+                                        ></rect>
+                                        <!-- Day 7: CN (x=620) -->
+                                        <rect
+                                            fill="#008080"
+                                            height="102"
+                                            rx="4"
+                                            width="24"
+                                            x="608"
+                                            y="108"
+                                        ></rect>
+                                        <!-- Weight Curve Path: 65.7 -> 65.6 -> 65.6 -> 65.5 -> 65.5 -> 65.4 -> 65.4 -->
+                                        <path
+                                            d="M80,80 C 120,85 140,88 170,90 C 210,92 230,96 260,100 C 300,103 320,105 350,110 C 390,114 410,115 440,118 C 480,122 500,125 530,126 C 580,128 600,129 620,130"
+                                            fill="none"
+                                            stroke="#00665d"
+                                            stroke-linecap="round"
+                                            stroke-width="3.5"
+                                        ></path>
+                                        <!-- Weight Data Nodes -->
+                                        <circle
+                                            cx="80"
+                                            cy="80"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="170"
+                                            cy="90"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="260"
+                                            cy="100"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="350"
+                                            cy="110"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="440"
+                                            cy="118"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="530"
+                                            cy="126"
+                                            fill="#ffffff"
+                                            r="4.5"
+                                            stroke="#00665d"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <circle
+                                            cx="620"
+                                            cy="130"
+                                            fill="#00665d"
+                                            r="5"
+                                            stroke="#ffffff"
+                                            stroke-width="2.5"
+                                        ></circle>
+                                        <!-- Weight label pin on today -->
+                                        <rect
+                                            fill="#00665d"
+                                            height="22"
+                                            rx="6"
+                                            width="60"
+                                            x="590"
+                                            y="142"
+                                        ></rect>
+                                        <text
+                                            fill="#ffffff"
+                                            font-family="Inter"
+                                            font-size="11"
+                                            font-weight="600"
+                                            text-anchor="middle"
+                                            x="620"
+                                            y="157"
+                                        >
+                                            65.4 kg
+                                        </text>
+                                        <!-- Day Axis text -->
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="80"
+                                            y="230"
+                                        >
+                                            T2 (14)
+                                        </text>
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="170"
+                                            y="230"
+                                        >
+                                            T3 (15)
+                                        </text>
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="260"
+                                            y="230"
+                                        >
+                                            T4 (16)
+                                        </text>
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="350"
+                                            y="230"
+                                        >
+                                            T5 (17)
+                                        </text>
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="440"
+                                            y="230"
+                                        >
+                                            T6 (18)
+                                        </text>
+                                        <text
+                                            fill="#3e4949"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            text-anchor="middle"
+                                            x="530"
+                                            y="230"
+                                        >
+                                            T7 (19)
+                                        </text>
+                                        <text
+                                            fill="#006565"
+                                            font-family="Inter"
+                                            font-size="12"
+                                            font-weight="600"
+                                            text-anchor="middle"
+                                            x="620"
+                                            y="230"
+                                        >
+                                            CN (Hôm nay)
+                                        </text>
+                                    </svg>
+                                </div>
+                                <!-- AI Clinical Insight Box -->
+                                <div
+                                    class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-md"
+                                >
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center shrink-0 text-primary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[24px]"
+                                            >smart_toy</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                                >Đánh giá Trợ lý Y khoa AI</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-secondary-container text-on-secondary-container"
+                                                >Độ tin cậy 98.4%</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed"
+                                        >
+                                            Tốc độ giảm mỡ duy trì ở mức an toàn
+                                            <strong>0.4kg/tuần</strong> mà không
+                                            làm suy hao khối lượng cơ nạc (Lean
+                                            Body Mass). Tỷ lệ tiêu hao calo ổn
+                                            định. Cần duy trì ngưỡng nạp năng
+                                            lượng không dưới 1,400 kcal để bảo
+                                            vệ tuyến giáp và cân bằng hormone.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Quick Medical Metrics Row -->
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-3 gap-space-md"
+                            >
+                                <div
+                                    class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-center gap-space-md"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[28px]"
+                                            >speed</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col min-w-0">
+                                        <span
+                                            class="font-label-md text-label-md text-outline"
+                                            >Đường huyết lúc đói</span
+                                        >
+                                        <span
+                                            class="font-headline-sm text-headline-sm text-on-surface truncate"
+                                            >92 mg/dL</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-secondary font-medium"
+                                            >Bình thường (70-99)</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-center gap-space-md"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-tertiary shrink-0"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[28px]"
+                                            >air</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col min-w-0">
+                                        <span
+                                            class="font-label-md text-label-md text-outline"
+                                            >SpO2 (Nồng độ Oxy)</span
+                                        >
+                                        <span
+                                            class="font-headline-sm text-headline-sm text-on-surface truncate"
+                                            >99 %</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-secondary font-medium"
+                                            >Bão hòa tối đa</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-center gap-space-md"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[28px]"
+                                            >psychology</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col min-w-0">
+                                        <span
+                                            class="font-label-md text-label-md text-outline"
+                                            >Chỉ số Căng thẳng</span
+                                        >
+                                        <span
+                                            class="font-headline-sm text-headline-sm text-on-surface truncate"
+                                            >24 / 100</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-secondary font-medium"
+                                            >Thư giãn hoàn toàn</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column: Nutrition Macro, Hydration & Steps -->
+                        <div class="xl:col-span-4 flex flex-col gap-space-md">
+                            <!-- Macro Distribution Card -->
+                            <div
+                                class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md"
+                            >
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span
+                                            class="font-label-md text-label-md uppercase text-outline tracking-wider"
+                                            >Cân bằng dinh dưỡng</span
+                                        >
+                                        <h3
+                                            class="font-headline-sm text-headline-sm text-on-surface"
+                                        >
+                                            Tỷ lệ Macro Tuần
+                                        </h3>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-outline"
+                                        >pie_chart</span
+                                    >
+                                </div>
+                                <!-- Donut Visualization & Stats -->
+                                <div
+                                    class="flex items-center justify-center py-space-sm"
+                                >
+                                    <div
+                                        class="relative w-44 h-44 flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-full h-full -rotate-90"
+                                            viewbox="0 0 100 100"
+                                        >
+                                            <!-- Background Circle -->
+                                            <circle
+                                                cx="50"
+                                                cy="50"
+                                                fill="none"
+                                                r="38"
+                                                stroke="#edeeef"
+                                                stroke-width="12"
+                                            ></circle>
+                                            <!-- Carbs: 45% (dasharray 238.76: 45% = 107.4) -->
+                                            <circle
+                                                class="transition-all duration-700"
+                                                cx="50"
+                                                cy="50"
+                                                fill="none"
+                                                r="38"
+                                                stroke="#006565"
+                                                stroke-dasharray="107.4 238.8"
+                                                stroke-dashoffset="0"
+                                                stroke-width="12"
+                                            ></circle>
+                                            <!-- Protein: 30% (71.6) -->
+                                            <circle
+                                                class="transition-all duration-700"
+                                                cx="50"
+                                                cy="50"
+                                                fill="none"
+                                                r="38"
+                                                stroke="#006d3d"
+                                                stroke-dasharray="71.6 238.8"
+                                                stroke-dashoffset="-107.4"
+                                                stroke-width="12"
+                                            ></circle>
+                                            <!-- Fat: 25% (59.7) -->
+                                            <circle
+                                                class="transition-all duration-700"
+                                                cx="50"
+                                                cy="50"
+                                                fill="none"
+                                                r="38"
+                                                stroke="#76d6d5"
+                                                stroke-dasharray="59.7 238.8"
+                                                stroke-dashoffset="-179"
+                                                stroke-width="12"
+                                            ></circle>
+                                        </svg>
+                                        <div
+                                            class="absolute flex flex-col items-center justify-center"
+                                        >
+                                            <span
+                                                class="font-label-md text-label-md text-outline"
+                                                >Trung bình</span
+                                            >
+                                            <span
+                                                class="font-headline-sm text-headline-sm text-on-surface font-bold"
+                                                >1,450</span
+                                            >
+                                            <span
+                                                class="font-label-md text-label-md text-on-surface-variant"
+                                                >kcal/ngày</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex flex-col gap-space-xs font-body-sm text-body-sm"
+                                >
+                                    <div
+                                        class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container-low transition-colors"
+                                    >
+                                        <div
+                                            class="flex items-center gap-space-xs"
+                                        >
+                                            <span
+                                                class="w-3 h-3 rounded-full bg-primary"
+                                            ></span>
+                                            <span class="text-on-surface"
+                                                >Tinh bột (Carbs)</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-space-sm"
+                                        >
+                                            <span class="text-outline"
+                                                >163g</span
+                                            >
+                                            <span
+                                                class="font-semibold text-on-surface"
+                                                >45%</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container-low transition-colors"
+                                    >
+                                        <div
+                                            class="flex items-center gap-space-xs"
+                                        >
+                                            <span
+                                                class="w-3 h-3 rounded-full bg-secondary"
+                                            ></span>
+                                            <span class="text-on-surface"
+                                                >Chất đạm (Protein)</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-space-sm"
+                                        >
+                                            <span class="text-outline"
+                                                >109g</span
+                                            >
+                                            <span
+                                                class="font-semibold text-on-surface"
+                                                >30%</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container-low transition-colors"
+                                    >
+                                        <div
+                                            class="flex items-center gap-space-xs"
+                                        >
+                                            <span
+                                                class="w-3 h-3 rounded-full bg-primary-fixed-dim"
+                                            ></span>
+                                            <span class="text-on-surface"
+                                                >Chất béo tốt (Fats)</span
+                                            >
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-space-sm"
+                                        >
+                                            <span class="text-outline"
+                                                >40g</span
+                                            >
+                                            <span
+                                                class="font-semibold text-on-surface"
+                                                >25%</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Water Hydration & Steps Widget -->
+                            <div
+                                class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md"
+                            >
+                                <!-- Water -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary"
+                                            >
+                                                <span
+                                                    class="material-symbols-outlined text-[18px]"
+                                                    >water_drop</span
+                                                >
+                                            </div>
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                                >Tuần hoàn Nước</span
+                                            >
+                                        </div>
+                                        <span
+                                            class="font-label-lg text-label-lg font-bold text-primary"
+                                            >2.4L / 2.5L</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden mt-1"
+                                    >
+                                        <div
+                                            class="bg-primary-container h-full rounded-full w-[96%]"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="flex justify-between font-label-md text-label-md text-outline"
+                                    >
+                                        <span>Đạt 96% mục tiêu hydrat hóa</span>
+                                        <span class="text-secondary font-medium"
+                                            >Xuất sắc</span
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-[1px] bg-surface-container-high w-full"
+                                ></div>
+                                <!-- Activity Steps -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary"
+                                            >
+                                                <span
+                                                    class="material-symbols-outlined text-[18px]"
+                                                    >directions_walk</span
+                                                >
+                                            </div>
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                                >Vận động thể chất</span
+                                            >
+                                        </div>
+                                        <span
+                                            class="font-label-lg text-label-lg font-bold text-secondary"
+                                            >8,650 bước</span
+                                        >
+                                    </div>
+                                    <div
+                                        class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden mt-1"
+                                    >
+                                        <div
+                                            class="bg-secondary h-full rounded-full w-[86%]"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="flex justify-between font-label-md text-label-md text-outline"
+                                    >
+                                        <span>Mục tiêu ngày: 10,000 bước</span>
+                                        <span
+                                            class="text-on-surface font-medium"
+                                            >Đốt cháy 420 kcal</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Clinical Alerts & Actionable Checklist Section (2 Columns) -->
+                    <div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+                        <!-- Health Alerts (5 columns) -->
+                        <div
+                            class="xl:col-span-5 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md"
+                        >
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-space-xs">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-[22px]"
+                                        >notifications_active</span
+                                    >
+                                    <h3
+                                        class="font-headline-sm text-headline-sm text-on-surface"
+                                    >
+                                        Cảnh báo Sinh hiệu Y tế
+                                    </h3>
+                                </div>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md"
+                                    >2 Cập nhật</span
+                                >
+                            </div>
+                            <div class="flex flex-col gap-space-sm">
+                                <!-- Positive Alert -->
+                                <div
+                                    class="p-space-md rounded-xl bg-secondary-container/30 flex items-start gap-space-sm"
+                                >
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[18px]"
+                                            >health_and_safety</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <div
+                                            class="flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-secondary-container"
+                                                >Huyết áp tối ưu liên tục</span
+                                            >
+                                            <span
+                                                class="font-label-md text-label-md text-outline"
+                                                >Hôm nay</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                                        >
+                                            Chỉ số huyết áp tâm thu và tâm
+                                            trương duy trì ổn định dưới 120/80
+                                            mmHg trong
+                                            <strong>14 ngày liên tiếp</strong>.
+                                            Nguy cơ biến cố tim mạch ở mức rất
+                                            thấp.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Warning / Attention Alert -->
+                                <div
+                                    class="p-space-md rounded-xl bg-error-container/40 flex items-start gap-space-sm"
+                                >
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-on-error-container shrink-0"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[18px]"
+                                            >priority_high</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <div
+                                            class="flex items-center justify-between"
+                                        >
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-error-container"
+                                                >Lưu ý phục hồi sau tập</span
+                                            >
+                                            <span
+                                                class="font-label-md text-label-md text-outline"
+                                                >Hôm qua</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-0.5"
+                                        >
+                                            Hôm qua bạn nạp thiếu
+                                            <strong>15g Protein</strong> so với
+                                            giáo án ngày tập chân nặng (Leg
+                                            Day). Khuyến nghị bù đắp qua bữa phụ
+                                            giàu Whey hoặc ức gà hôm nay để ngăn
+                                            mỏi cơ kéo dài.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Actionable Medical Checklist (7 columns) -->
+                        <div
+                            class="xl:col-span-7 p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md"
+                        >
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-space-xs">
+                                    <span
+                                        class="material-symbols-outlined text-secondary text-[22px]"
+                                        >task_alt</span
+                                    >
+                                    <h3
+                                        class="font-headline-sm text-headline-sm text-on-surface"
+                                    >
+                                        Kế hoạch Phục hồi Hôm nay
+                                    </h3>
+                                </div>
+                                <span
+                                    class="font-label-md text-label-md text-primary font-semibold"
+                                    >1 / 3 hoàn thành</span
+                                >
+                            </div>
+                            <div class="flex flex-col gap-space-xs">
+                                <!-- Checklist Item 1 -->
+                                <label
+                                    class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"
+                                >
+                                    <div class="flex items-center gap-space-sm">
+                                        <input
+                                            checked=""
+                                            class="w-5 h-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer"
+                                            type="checkbox"
+                                        />
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface line-through opacity-70"
+                                                >Uống bổ sung 500ml nước ấm
+                                                &amp; điện giải</span
+                                            >
+                                            <span
+                                                class="font-body-sm text-body-sm text-outline"
+                                                >Hỗ trợ thanh lọc và cân bằng
+                                                muối khoáng buổi sáng</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="font-label-md text-label-md px-2 py-1 rounded bg-secondary-container/50 text-on-secondary-container font-medium"
+                                        >08:00 • Xong</span
+                                    >
+                                </label>
+                                <!-- Checklist Item 2 -->
+                                <label
+                                    class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"
+                                >
+                                    <div class="flex items-center gap-space-sm">
+                                        <input
+                                            class="w-5 h-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer"
+                                            type="checkbox"
+                                        />
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                                >Đi bộ nhẹ nhàng 15 phút sau bữa
+                                                tối</span
+                                            >
+                                            <span
+                                                class="font-body-sm text-body-sm text-outline"
+                                                >Tối ưu độ nhạy insulin, giảm
+                                                tích mỡ vùng bụng</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="font-label-md text-label-md px-2 py-1 rounded bg-surface-container text-on-surface-variant font-medium"
+                                        >19:30</span
+                                    >
+                                </label>
+                                <!-- Checklist Item 3 -->
+                                <label
+                                    class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"
+                                >
+                                    <div class="flex items-center gap-space-sm">
+                                        <input
+                                            class="w-5 h-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer"
+                                            type="checkbox"
+                                        />
+                                        <div class="flex flex-col">
+                                            <span
+                                                class="font-label-lg text-label-lg font-semibold text-on-surface"
+                                                >Đo lại huyết áp tĩnh &amp; nhịp
+                                                tim lúc nghỉ</span
+                                            >
+                                            <span
+                                                class="font-body-sm text-body-sm text-outline"
+                                                >Đảm bảo sinh hiệu trở về trạng
+                                                thái thư giãn trước khi
+                                                ngủ</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="font-label-md text-label-md px-2 py-1 rounded bg-surface-container text-on-surface-variant font-medium"
+                                        >20:00</span
+                                    >
+                                </label>
+                            </div>
+                            <!-- Quick Doctor Consultation Teaser -->
+                            <div
+                                class="mt-space-xs p-space-sm rounded-xl bg-primary-fixed/20 flex items-center justify-between"
+                            >
+                                <div class="flex items-center gap-space-sm">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-[20px]"
+                                            >medical_services</span
+                                        >
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="font-label-md text-label-md font-semibold text-on-primary-fixed"
+                                            >Bác sĩ phụ trách: ThS. BS Lê Hoàng
+                                            Quân</span
+                                        >
+                                        <span
+                                            class="font-body-sm text-body-sm text-on-primary-fixed-variant"
+                                            >Lịch tái khám định kỳ tiếp theo vào
+                                            Thứ Năm tuần này (14:30)</span
+                                        >
+                                    </div>
+                                </div>
+                                <button
+                                    class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shrink-0"
+                                >
+                                    Nhắn tin Bác sĩ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    // Micro-interaction for checklist progress indicator
+                    document.addEventListener("DOMContentLoaded", async () => {
+                        const checkboxes = document.querySelectorAll(
+                            'input[type="checkbox"]',
+                        );
+                        checkboxes.forEach((cb) => {
+                            cb.addEventListener("change", (e) => {
+                                const titleSpan = e.target
+                                    .closest("label")
+                                    .querySelector(".font-label-lg");
+                                if (e.target.checked) {
+                                    titleSpan.classList.add(
+                                        "line-through",
+                                        "opacity-70",
+                                    );
+                                } else {
+                                    titleSpan.classList.remove(
+                                        "line-through",
+                                        "opacity-70",
+                                    );
+                                }
+                            });
+                        });
+
+                        // Nạp và đồng bộ thông tin người dùng từ Supabase Auth (kể cả sau khi redirect từ Google)
+                        function renderUserInfo(user) {
+                            if (!user) return;
+                            const displayName = user.user_metadata?.full_name || user.user_metadata?.name || user.email.split("@")[0];
+                            const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}`;
+                            const nameEl = document.getElementById("user-display-name");
+                            if (nameEl) nameEl.innerText = displayName;
+                            const roleEl = document.getElementById("user-role-badge");
+                            if (roleEl) roleEl.innerText = user.email;
+                            const avatarEl = document.getElementById("user-avatar-container");
+                            if (avatarEl) {
+                                avatarEl.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="w-full h-full object-cover" />`;
+                            }
+                        }
+
+                        if (window.APP_SUPABASE) {
+                            try {
+                                const user = await window.APP_SUPABASE.getCurrentUser();
+                                if (user) renderUserInfo(user);
+
+                                // Lắng nghe sự kiện đăng nhập khi vừa redirect về từ Google OAuth
+                                window.APP_SUPABASE.onAuthStateChange((event, session) => {
+                                    if (session && session.user) {
+                                        renderUserInfo(session.user);
+                                    }
+                                });
+                            } catch (err) {
+                                console.warn("Lỗi tải thông tin user:", err);
+                            }
+                        }
+                    });
+                </script>
+            </main>
+        </div>
+    </body>
+</html>

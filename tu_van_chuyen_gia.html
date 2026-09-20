@@ -1,0 +1,1677 @@
+<!doctype html>
+
+<html lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./tu_van.css" />
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="./supabaseClient.js"></script>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-variant": "#e1e3e4",
+                            tertiary: "#00665d",
+                            "tertiary-fixed": "#61f9e9",
+                            "surface-container": "#edeeef",
+                            "on-secondary-fixed-variant": "#00522d",
+                            "on-error-container": "#93000a",
+                            "primary-fixed": "#93f2f2",
+                            "on-primary-container": "#e3fffe",
+                            "on-surface": "#191c1d",
+                            "surface-dim": "#d9dadb",
+                            "on-surface-variant": "#3e4949",
+                            "on-secondary-fixed": "#00210f",
+                            "tertiary-fixed-dim": "#3adccc",
+                            "secondary-fixed": "#9af6b8",
+                            "outline-variant": "#bdc9c8",
+                            "on-tertiary-fixed": "#00201d",
+                            "tertiary-container": "#008177",
+                            "on-primary-fixed": "#002020",
+                            "on-background": "#191c1d",
+                            "on-tertiary-fixed-variant": "#005049",
+                            "surface-bright": "#f8f9fa",
+                            "on-primary": "#ffffff",
+                            surface: "#f8f9fa",
+                            error: "#ba1a1a",
+                            outline: "#6e7979",
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#76d6d5",
+                            "on-primary-fixed-variant": "#004f4f",
+                            "inverse-on-surface": "#f0f1f2",
+                            "on-tertiary": "#ffffff",
+                            "secondary-fixed-dim": "#7ed99e",
+                            "surface-container-high": "#e7e8e9",
+                            "surface-container-low": "#f3f4f5",
+                            background: "#f8f9fa",
+                            "on-secondary-container": "#047240",
+                            "surface-container-lowest": "#ffffff",
+                            "on-error": "#ffffff",
+                            primary: "#006565",
+                            "error-container": "#ffdad6",
+                            "inverse-primary": "#76d6d5",
+                            secondary: "#006d3d",
+                            "surface-tint": "#006a6a",
+                            "surface-container-highest": "#e1e3e4",
+                            "inverse-surface": "#2e3132",
+                            "primary-container": "#008080",
+                            "on-tertiary-container": "#e5fffa",
+                            "secondary-container": "#97f3b5",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            gutter: "1.5rem",
+                            "space-xl": "2.5rem",
+                            "space-sm": "0.5rem",
+                            "space-lg": "1.5rem",
+                            margin: "2rem",
+                            "space-md": "1rem",
+                            "space-xs": "0.25rem",
+                        },
+                        fontFamily: {
+                            "body-sm": ["Inter"],
+                            "label-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "headline-xl": ["Inter"],
+                            "headline-md": ["Inter"],
+                        },
+                        fontSize: {
+                            "body-sm": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "400" },
+                            ],
+                            "label-md": [
+                                "12px",
+                                { lineHeight: "16px", fontWeight: "500" },
+                            ],
+                            "body-lg": [
+                                "18px",
+                                { lineHeight: "28px", fontWeight: "400" },
+                            ],
+                            "headline-sm": [
+                                "20px",
+                                { lineHeight: "28px", fontWeight: "600" },
+                            ],
+                            "headline-lg": [
+                                "32px",
+                                { lineHeight: "40px", fontWeight: "600" },
+                            ],
+                            "label-lg": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "500" },
+                            ],
+                            "body-md": [
+                                "16px",
+                                { lineHeight: "24px", fontWeight: "400" },
+                            ],
+                            "headline-xl": [
+                                "40px",
+                                { lineHeight: "48px", fontWeight: "700" },
+                            ],
+                            "headline-md": [
+                                "24px",
+                                { lineHeight: "32px", fontWeight: "600" },
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body class="bg-background font-body-md text-on-surface antialiased">
+        <aside
+            class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"
+        >
+            <div class="flex flex-col">
+                <div class="h-16 px-space-lg flex items-center gap-space-sm">
+                    <img
+                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
+                        class="h-8 w-auto object-contain"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                    />
+                    <div class="flex flex-col">
+                        <span
+                            class="font-headline-sm text-headline-sm text-primary leading-none"
+                            >Green Health</span
+                        ><span class="font-label-md text-label-md text-outline"
+                            >VitaFlow Platform</span
+                        >
+                    </div>
+                </div>
+                <div class="px-space-md py-space-sm">
+                    <div
+                        class="px-space-sm py-space-xs mb-space-xs font-label-md text-label-md text-outline uppercase tracking-wider"
+                    >
+                        Chức năng chính
+                    </div>
+                    <nav
+                        class="flex flex-col gap-space-xs"
+                        data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl"
+                    >
+                        <a
+                            class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="dashboard-tong-quan"
+                            href="tong_quan_skhoe.html"
+                            ><span
+                                class="material-symbols-outlined text-primary"
+                                >monitoring</span
+                            >Tổng quan Sức khỏe</a
+                        ><a
+                            class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="nhat-ky-dinh-duong-ai"
+                            href="nhat_ky.html"
+                            ><span
+                                class="material-symbols-outlined text-primary"
+                                >restaurant</span
+                            >Nhật ký &amp; AI Food Log</a
+                        ><a
+                            class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="thuc-don-va-ke-hoach"
+                            href="thucdon.html"
+                            ><span
+                                class="material-symbols-outlined text-primary"
+                                >calendar_month</span
+                            >Thực đơn &amp; Kế hoạch</a
+                        ><a
+                            aria-current="page"
+                            class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl"
+                            data-path="tu-van-chuyen-gia"
+                            href="tu_van_chuyen_gia.html"
+                            ><span
+                                class="material-symbols-outlined text-primary"
+                                >support_agent</span
+                            >Tư vấn Chuyên gia</a
+                        ><a
+                            class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                            data-path="quan-tri-co-so-du-lieu"
+                            href="quan_tri_thuc_pham.html"
+                            ><span
+                                class="material-symbols-outlined text-primary"
+                                >database</span
+                            >Quản trị Thực phẩm</a
+                        >
+                    </nav>
+                </div>
+            </div>
+            <div
+                class="p-space-md bg-surface-container-low m-space-md rounded-xl flex flex-col gap-space-xs"
+            >
+                <div class="flex items-center justify-between">
+                    <span
+                        class="font-label-md text-label-md text-on-surface-variant"
+                        >Mục tiêu calo hôm nay</span
+                    ><span
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        >1,450 / 2,000 kcal</span
+                    >
+                </div>
+                <div
+                    class="w-full bg-surface-variant h-2 rounded-full overflow-hidden"
+                >
+                    <div class="bg-secondary h-full rounded-full w-[72%]"></div>
+                </div>
+            </div>
+        </aside>
+        <div class="pl-72">
+            <header
+                class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"
+            >
+                <div class="flex items-center gap-space-md">
+                    <img
+                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
+                        class="h-8 w-auto object-contain"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                    /><span
+                        class="font-headline-sm text-headline-sm text-on-surface"
+                        >Hệ sinh thái Sức khỏe Toàn diện</span
+                    >
+                </div>
+                <div class="flex items-center gap-space-lg">
+                    <div
+                        class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md"
+                    >
+                        <span class="material-symbols-outlined text-base"
+                            >vital_signs</span
+                        ><span>TDEE: 2,150 kcal • BMI: 21.8</span>
+                    </div>
+                    <button
+                        class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center"
+                    >
+                        <span class="material-symbols-outlined"
+                            >notifications</span
+                        ><span
+                            class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
+                        ></span>
+                    </button>
+                    <div class="flex items-center gap-space-sm pl-space-sm" id="user-profile-header">
+                        <div
+                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden"
+                            id="user-avatar-container"
+                        >
+                            <span
+                                class="material-symbols-outlined text-on-primary text-[18px]"
+                                >person</span
+                            >
+                        </div>
+                        <div class="hidden sm:flex flex-col">
+                            <span
+                                class="font-label-lg text-label-lg text-on-surface leading-tight"
+                                id="user-display-name"
+                                >Nguyễn Minh Anh</span
+                            ><span
+                                class="font-label-md text-label-md text-on-surface-variant leading-tight"
+                                id="user-role-badge"
+                                >Người dùng đã xác thực</span
+                            >
+                        </div>
+                        <button
+                            onclick="window.APP_SUPABASE.signOutUser()"
+                            class="ml-2 p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/30 transition-colors"
+                            title="Đăng xuất"
+                        >
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <main
+                class="relative pt-16 w-full bg-background min-h-screen px-space-lg py-space-lg"
+            >
+                <div class="flex flex-col w-full gap-space-lg">
+                    <!-- Banner Top: Next Appointment Status & Quick Telehealth Action -->
+                    <section
+                        class="w-full bg-gradient-to-r from-primary to-primary-container rounded-xl p-space-lg text-on-primary shadow-md relative overflow-hidden"
+                    >
+                        <div
+                            class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none"
+                        >
+                            <span class="material-symbols-outlined text-[240px]"
+                                >video_camera_front</span
+                            >
+                        </div>
+                        <div
+                            class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-space-md"
+                        >
+                            <div class="flex items-start gap-space-md">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center shrink-0"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-tertiary-fixed text-[28px]"
+                                        style="
+                                            font-variation-settings: &quot;FILL&quot;
+                                                1;
+                                        "
+                                        >videocam</span
+                                    >
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex items-center gap-space-xs mb-1"
+                                    >
+                                        <span
+                                            class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md"
+                                        >
+                                            <span
+                                                class="w-2 h-2 rounded-full bg-secondary animate-pulse"
+                                            ></span>
+                                            Sắp diễn ra hôm nay
+                                        </span>
+                                        <span
+                                            class="font-label-md text-label-md text-primary-fixed"
+                                            >19:30 - 20:15 (45 phút)</span
+                                        >
+                                    </div>
+                                    <h2
+                                        class="font-headline-sm text-headline-sm text-on-primary"
+                                    >
+                                        Tư vấn Dinh dưỡng 1-1 với ThS. BS.
+                                        Nguyễn Hoàng Nam
+                                    </h2>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-primary-container mt-1 max-w-2xl"
+                                    >
+                                        Phiên khám online trực tiếp kiểm tra
+                                        tiến độ giảm mỡ và điều chỉnh lượng tinh
+                                        bột hấp thu chậm theo số liệu tuần qua.
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-space-sm shrink-0"
+                            >
+                                <button
+                                    class="px-space-md py-space-sm bg-on-primary/15 hover:bg-on-primary/25 rounded-lg text-on-primary font-label-lg text-label-lg transition-all flex items-center gap-space-xs"
+                                    onclick="toggleQuickChat()"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-base"
+                                        >forum</span
+                                    >
+                                    <span>Tin nhắn dặn dò</span>
+                                </button>
+                                <button
+                                    class="px-space-lg py-space-sm bg-tertiary-fixed text-on-tertiary-fixed hover:bg-tertiary-fixed-dim rounded-lg font-label-lg text-label-lg font-semibold shadow-sm transition-all flex items-center gap-space-xs"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-base"
+                                        >call</span
+                                    >
+                                    <span>Vào phòng tư vấn</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Filter & Search Toolbar -->
+                    <section
+                        class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md"
+                    >
+                        <div
+                            class="flex flex-col lg:flex-row gap-space-md items-center justify-between"
+                        >
+                            <!-- Search Input -->
+                            <div class="relative w-full lg:w-96">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-base"
+                                    >search</span
+                                >
+                                <input
+                                    class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all placeholder:text-outline"
+                                    id="doctor-search"
+                                    placeholder="Tìm theo tên bác sĩ, bệnh viện, chuyên môn..."
+                                    type="text"
+                                />
+                            </div>
+                            <!-- Quick Metrics Highlight -->
+                            <div
+                                class="flex items-center gap-space-md w-full lg:w-auto overflow-x-auto pb-1 lg:pb-0"
+                            >
+                                <div
+                                    class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg shrink-0"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-primary text-base"
+                                        >verified</span
+                                    >
+                                    <span
+                                        class="font-label-md text-label-md text-on-surface"
+                                        >100% Chuyên gia đã kiểm duyệt</span
+                                    >
+                                </div>
+                                <div
+                                    class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg shrink-0"
+                                >
+                                    <span
+                                        class="material-symbols-outlined text-secondary text-base"
+                                        >sync_saved_locally</span
+                                    >
+                                    <span
+                                        class="font-label-md text-label-md text-on-surface"
+                                        >Tích hợp dữ liệu Calo &amp; TDEE</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Category Chips & Mode Selectors -->
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-space-sm pt-2"
+                        >
+                            <!-- Categories -->
+                            <div
+                                class="flex flex-wrap items-center gap-space-xs"
+                            >
+                                <button
+                                    class="filter-chip active px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all"
+                                >
+                                    Tất cả chuyên khoa
+                                </button>
+                                <button
+                                    class="filter-chip px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+                                >
+                                    Dinh dưỡng giảm cân &amp; chuyển hoá
+                                </button>
+                                <button
+                                    class="filter-chip px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+                                >
+                                    Tiểu đường &amp; Tim mạch
+                                </button>
+                                <button
+                                    class="filter-chip px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+                                >
+                                    Thể thao &amp; Tăng cơ (CISSN)
+                                </button>
+                                <button
+                                    class="filter-chip px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+                                >
+                                    Mẹ bầu &amp; Trẻ em
+                                </button>
+                            </div>
+                            <!-- Format & Price Toggles -->
+                            <div class="flex items-center gap-space-sm">
+                                <div
+                                    class="flex items-center bg-surface-container-low rounded-lg p-1"
+                                >
+                                    <button
+                                        class="px-2.5 py-1 rounded-md bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-xs flex items-center gap-1"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-sm"
+                                            >video_chat</span
+                                        >
+                                        <span>Online Video</span>
+                                    </button>
+                                    <button
+                                        class="px-2.5 py-1 rounded-md text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-sm"
+                                            >local_hospital</span
+                                        >
+                                        <span>Trực tiếp tại viện</span>
+                                    </button>
+                                </div>
+                                <select
+                                    class="bg-surface-container-low px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer"
+                                >
+                                    <option>Mức giá: Mọi mức giá</option>
+                                    <option>Dưới 300.000đ / phiên</option>
+                                    <option>300.000đ - 500.000đ / phiên</option>
+                                    <option>Trên 500.000đ / phiên</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Main Grid: Experts Directory (Left) + Interactive Booking & Telehealth (Right) -->
+                    <div
+                        class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start"
+                    >
+                        <!-- Left 7 Cols: Specialists List -->
+                        <div class="xl:col-span-7 flex flex-col gap-space-md">
+                            <div class="flex items-center justify-between">
+                                <h3
+                                    class="font-headline-sm text-headline-sm text-on-surface"
+                                >
+                                    Chuyên gia dinh dưỡng nổi bật
+                                </h3>
+                                <span
+                                    class="font-label-md text-label-md text-outline"
+                                    >Hiển thị 3 / 18 chuyên gia phù hợp</span
+                                >
+                            </div>
+                            <!-- Card 1: ThS. BS Nguyễn Hoàng Nam -->
+                            <article
+                                class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-md relative overflow-hidden"
+                            >
+                                <div
+                                    class="flex flex-col sm:flex-row items-start gap-space-md"
+                                >
+                                    <div class="relative shrink-0">
+                                        <img
+                                            class="w-24 h-24 rounded-xl object-cover shadow-sm"
+                                            data-alt="Professional medical portrait of male Asian clinical nutrition doctor wearing white doctor coat and stethoscope, warm trustworthy smile, crisp clean medical studio lighting with soft teal background tone"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHCYZOmXjhpAFwBeOsypBHXWy17Wtj5_xAvaHjHF-58AEPb1KQtMHiRWNl2LVjfDyydZPDRgQP8F8HBo3H-3MmbtPUaOtGhRGyRW_YN04M2bZ6YBKP3LaA48S7cxd_PGo_CZnX93FthnI1lJ2OZxHmVmW3b98-I10snsfjk5uVJv2DIwF8vII1l4gTQYgsF4u3m6WLX0gO4B9NG2vJB9eioSyEwAvhhaLFjyuwUKWFKQl4dMHrGbyog"
+                                        />
+                                        <span
+                                            class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary text-[10px] px-1.5 py-0.5 rounded-full font-label-md font-semibold flex items-center gap-0.5"
+                                        >
+                                            <span
+                                                class="material-symbols-outlined text-[12px]"
+                                                >verified</span
+                                            >
+                                            Đã xác thực
+                                        </span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div
+                                            class="flex items-start justify-between gap-space-xs"
+                                        >
+                                            <div>
+                                                <div
+                                                    class="flex items-center gap-1.5 flex-wrap"
+                                                >
+                                                    <h4
+                                                        class="font-headline-sm text-headline-sm text-on-surface text-[18px]"
+                                                    >
+                                                        ThS. BS. Nguyễn Hoàng
+                                                        Nam
+                                                    </h4>
+                                                </div>
+                                                <p
+                                                    class="font-body-sm text-body-sm text-primary font-medium mt-0.5"
+                                                >
+                                                    Viện Dinh dưỡng Quốc gia •
+                                                    12 năm kinh nghiệm
+                                                </p>
+                                            </div>
+                                            <div class="text-right shrink-0">
+                                                <span
+                                                    class="font-headline-sm text-headline-sm text-primary block leading-none"
+                                                    >350.000đ</span
+                                                >
+                                                <span
+                                                    class="font-label-md text-label-md text-outline"
+                                                    >/ phiên 45 phút</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <!-- Tags & Review stats -->
+                                        <div
+                                            class="flex flex-wrap items-center gap-space-xs mt-space-xs"
+                                        >
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container rounded-md font-label-md text-label-md text-on-surface"
+                                            >
+                                                <span
+                                                    class="material-symbols-outlined text-amber-500 text-sm"
+                                                    style="
+                                                        font-variation-settings: &quot;FILL&quot;
+                                                            1;
+                                                    "
+                                                    >star</span
+                                                >
+                                                <strong class="font-semibold"
+                                                    >4.9</strong
+                                                >
+                                                <span class="text-outline"
+                                                    >(128 tư vấn)</span
+                                                >
+                                            </span>
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Giảm cân chuẩn Y khoa</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Rối loạn mỡ máu</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2"
+                                        >
+                                            Chuyên sâu xây dựng phác đồ can
+                                            thiệp dinh dưỡng cá thể hoá cho hội
+                                            chứng chuyển hoá, gan nhiễm mỡ, tối
+                                            ưu hóa tỷ lệ mỡ dưới da không làm
+                                            mất cơ bắp.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Available Slots Today & Booking Trigger -->
+                                <div
+                                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"
+                                >
+                                    <div
+                                        class="flex items-center gap-space-xs w-full sm:w-auto"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-outline text-base"
+                                            >schedule</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-on-surface-variant"
+                                            >Lịch trống hôm nay:</span
+                                        >
+                                        <div
+                                            class="flex items-center gap-1 overflow-x-auto"
+                                        >
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'ThS. BS. Nguyễn Hoàng Nam',
+                                                        '350.000đ',
+                                                        '14:00',
+                                                    )
+                                                "
+                                            >
+                                                14:00
+                                            </button>
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'ThS. BS. Nguyễn Hoàng Nam',
+                                                        '350.000đ',
+                                                        '16:30',
+                                                    )
+                                                "
+                                            >
+                                                16:30
+                                            </button>
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'ThS. BS. Nguyễn Hoàng Nam',
+                                                        '350.000đ',
+                                                        '20:00',
+                                                    )
+                                                "
+                                            >
+                                                20:00
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="w-full sm:w-auto px-space-md py-1.5 bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg font-medium transition-all text-center"
+                                        onclick="
+                                            openBookingPanel(
+                                                'ThS. BS. Nguyễn Hoàng Nam',
+                                                '350.000đ / 45 phút',
+                                                'Dinh dưỡng Giảm cân &amp; Chuyển hoá',
+                                            )
+                                        "
+                                    >
+                                        Đặt lịch ngay
+                                    </button>
+                                </div>
+                            </article>
+                            <!-- Card 2: Chuyên gia Lê Mai Anh -->
+                            <article
+                                class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-md relative overflow-hidden"
+                            >
+                                <div
+                                    class="flex flex-col sm:flex-row items-start gap-space-md"
+                                >
+                                    <div class="relative shrink-0">
+                                        <img
+                                            class="w-24 h-24 rounded-xl object-cover shadow-sm"
+                                            data-alt="Confident female sports nutritionist in athletic navy blazer and smart modern posture, warm professional smile, high key clinic studio setting, clean teal and green color hints"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdkS8348WC-RcOcaWqqcXHy7pZGdwaUkC-B7dPqAQSgiC1_TP3qZlCOQZPAAOEttM2M1hX3gCubIdK-B38bIRmgpIac9Ku6Wio8AExgEkqZMKRTEE0qTrXqdr83K68uKAyX_ZJtoEkwWppEcP-m8RV1jAhjUa3u49xLQz5Y-c93EVvrSg61gl4-cFBAcFq2JTIFhF_f2UQiz71qCu6RJ6YND4c1RU4rTJq98BhITipt9WxxddMNOotOQ"
+                                        />
+                                        <span
+                                            class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary text-[10px] px-1.5 py-0.5 rounded-full font-label-md font-semibold flex items-center gap-0.5"
+                                        >
+                                            <span
+                                                class="material-symbols-outlined text-[12px]"
+                                                >verified</span
+                                            >
+                                            Đã xác thực
+                                        </span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div
+                                            class="flex items-start justify-between gap-space-xs"
+                                        >
+                                            <div>
+                                                <div
+                                                    class="flex items-center gap-1.5 flex-wrap"
+                                                >
+                                                    <h4
+                                                        class="font-headline-sm text-headline-sm text-on-surface text-[18px]"
+                                                    >
+                                                        Chuyên gia Lê Mai Anh
+                                                    </h4>
+                                                </div>
+                                                <p
+                                                    class="font-body-sm text-body-sm text-primary font-medium mt-0.5"
+                                                >
+                                                    Chứng chỉ CISSN Thụy Sĩ • 8
+                                                    năm kinh nghiệm
+                                                </p>
+                                            </div>
+                                            <div class="text-right shrink-0">
+                                                <span
+                                                    class="font-headline-sm text-headline-sm text-primary block leading-none"
+                                                    >420.000đ</span
+                                                >
+                                                <span
+                                                    class="font-label-md text-label-md text-outline"
+                                                    >/ phiên 45 phút</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <!-- Tags & Review stats -->
+                                        <div
+                                            class="flex flex-wrap items-center gap-space-xs mt-space-xs"
+                                        >
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container rounded-md font-label-md text-label-md text-on-surface"
+                                            >
+                                                <span
+                                                    class="material-symbols-outlined text-amber-500 text-sm"
+                                                    style="
+                                                        font-variation-settings: &quot;FILL&quot;
+                                                            1;
+                                                    "
+                                                    >star</span
+                                                >
+                                                <strong class="font-semibold"
+                                                    >5.0</strong
+                                                >
+                                                <span class="text-outline"
+                                                    >(95 tư vấn)</span
+                                                >
+                                            </span>
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Body Recomposition</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Macro Vận động viên</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2"
+                                        >
+                                            Chuyên gia dinh dưỡng thể thao cao
+                                            cấp, cố vấn cho các vận động viên
+                                            thể hình &amp; marathon. Thiết kế
+                                            khẩu phần nạp carb - đạm theo chu kỳ
+                                            tập luyện cá nhân.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Available Slots Today & Booking Trigger -->
+                                <div
+                                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"
+                                >
+                                    <div
+                                        class="flex items-center gap-space-xs w-full sm:w-auto"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-outline text-base"
+                                            >schedule</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-on-surface-variant"
+                                            >Lịch trống:</span
+                                        >
+                                        <div
+                                            class="flex items-center gap-1 overflow-x-auto"
+                                        >
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'Lê Mai Anh',
+                                                        '420.000đ',
+                                                        '09:00',
+                                                    )
+                                                "
+                                            >
+                                                09:00 Mai
+                                            </button>
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'Lê Mai Anh',
+                                                        '420.000đ',
+                                                        '15:30',
+                                                    )
+                                                "
+                                            >
+                                                15:30 Mai
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="w-full sm:w-auto px-space-md py-1.5 bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg font-medium transition-all text-center"
+                                        onclick="
+                                            openBookingPanel(
+                                                'Lê Mai Anh',
+                                                '420.000đ / 45 phút',
+                                                'Dinh dưỡng Thể thao &amp; Tăng cơ',
+                                            )
+                                        "
+                                    >
+                                        Đặt lịch ngay
+                                    </button>
+                                </div>
+                            </article>
+                            <!-- Card 3: Bác sĩ CK1 Trần Thị Thu Hà -->
+                            <article
+                                class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-md relative overflow-hidden"
+                            >
+                                <div
+                                    class="flex flex-col sm:flex-row items-start gap-space-md"
+                                >
+                                    <div class="relative shrink-0">
+                                        <img
+                                            class="w-24 h-24 rounded-xl object-cover shadow-sm"
+                                            data-alt="Middle-aged female Vietnamese doctor in white medical lab coat with warm glasses and kind attentive expression, modern clinical research office background, soft natural lighting"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1dBMy2gibCKouc_-9f1Pr_gwG3DJSCe8lRe-ceTJgjtKHQ2gCGJS70ximM_vRHqzUG8iZtBf7oLGm7rDv38SlTuNpNNh2Ts2YQX25hAFLDNi29lOgmc0_xdA28qitPUgwSFYB4EHy8h8Td_Lut3sKRrypprGx2wKawNQyptVPuhSfVpeYa0iqhFhAMuXJ8pSqWaeOax1O3vcOP3dZBrPgDatrr_rjSdjT4lOjnIY8bs0UIv8aKG2RXA"
+                                        />
+                                        <span
+                                            class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary text-[10px] px-1.5 py-0.5 rounded-full font-label-md font-semibold flex items-center gap-0.5"
+                                        >
+                                            <span
+                                                class="material-symbols-outlined text-[12px]"
+                                                >verified</span
+                                            >
+                                            Đã xác thực
+                                        </span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div
+                                            class="flex items-start justify-between gap-space-xs"
+                                        >
+                                            <div>
+                                                <div
+                                                    class="flex items-center gap-1.5 flex-wrap"
+                                                >
+                                                    <h4
+                                                        class="font-headline-sm text-headline-sm text-on-surface text-[18px]"
+                                                    >
+                                                        BS. CK1 Trần Thị Thu Hà
+                                                    </h4>
+                                                </div>
+                                                <p
+                                                    class="font-body-sm text-body-sm text-primary font-medium mt-0.5"
+                                                >
+                                                    Dinh dưỡng Lâm sàng &amp;
+                                                    Nội tiết • 15 năm kinh
+                                                    nghiệm
+                                                </p>
+                                            </div>
+                                            <div class="text-right shrink-0">
+                                                <span
+                                                    class="font-headline-sm text-headline-sm text-primary block leading-none"
+                                                    >380.000đ</span
+                                                >
+                                                <span
+                                                    class="font-label-md text-label-md text-outline"
+                                                    >/ phiên 45 phút</span
+                                                >
+                                            </div>
+                                        </div>
+                                        <!-- Tags & Review stats -->
+                                        <div
+                                            class="flex flex-wrap items-center gap-space-xs mt-space-xs"
+                                        >
+                                            <span
+                                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container rounded-md font-label-md text-label-md text-on-surface"
+                                            >
+                                                <span
+                                                    class="material-symbols-outlined text-amber-500 text-sm"
+                                                    style="
+                                                        font-variation-settings: &quot;FILL&quot;
+                                                            1;
+                                                    "
+                                                    >star</span
+                                                >
+                                                <strong class="font-semibold"
+                                                    >4.95</strong
+                                                >
+                                                <span class="text-outline"
+                                                    >(210 tư vấn)</span
+                                                >
+                                            </span>
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Tiểu đường Type 2</span
+                                            >
+                                            <span
+                                                class="px-2 py-0.5 bg-surface-container-low rounded-md font-label-md text-label-md text-tertiary font-medium"
+                                                >Kiểm soát HbA1c</span
+                                            >
+                                        </div>
+                                        <p
+                                            class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-2"
+                                        >
+                                            Chuyên gia dinh dưỡng can thiệp bệnh
+                                            lý mạn tính: kiểm soát chỉ số đường
+                                            huyết sau ăn thông qua chỉ số
+                                            Glycemic Index (GI), xây dựng thực
+                                            đơn an toàn không hạ đường huyết.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Available Slots Today & Booking Trigger -->
+                                <div
+                                    class="bg-surface-container-low rounded-lg p-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"
+                                >
+                                    <div
+                                        class="flex items-center gap-space-xs w-full sm:w-auto"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-outline text-base"
+                                            >schedule</span
+                                        >
+                                        <span
+                                            class="font-label-md text-label-md text-on-surface-variant"
+                                            >Lịch trống:</span
+                                        >
+                                        <div
+                                            class="flex items-center gap-1 overflow-x-auto"
+                                        >
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'BS. CK1 Trần Thị Thu Hà',
+                                                        '380.000đ',
+                                                        '10:30',
+                                                    )
+                                                "
+                                            >
+                                                10:30 Mai
+                                            </button>
+                                            <button
+                                                class="px-2 py-1 bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-primary font-label-md text-label-md rounded font-semibold transition-colors"
+                                                onclick="
+                                                    selectDoctorSlot(
+                                                        'BS. CK1 Trần Thị Thu Hà',
+                                                        '380.000đ',
+                                                        '17:00',
+                                                    )
+                                                "
+                                            >
+                                                17:00 Thứ 5
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="w-full sm:w-auto px-space-md py-1.5 bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg font-medium transition-all text-center"
+                                        onclick="
+                                            openBookingPanel(
+                                                'BS. CK1 Trần Thị Thu Hà',
+                                                '380.000đ / 45 phút',
+                                                'Tiểu đường &amp; Tim mạch',
+                                            )
+                                        "
+                                    >
+                                        Đặt lịch ngay
+                                    </button>
+                                </div>
+                            </article>
+                        </div>
+                        <!-- Right 5 Cols: Interactive Booking Panel & Integrated Health Sync -->
+                        <div class="xl:col-span-5 flex flex-col gap-space-md">
+                            <!-- Booking Card -->
+                            <div
+                                class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md"
+                                id="booking-container"
+                            >
+                                <div
+                                    class="flex items-center justify-between pb-space-xs"
+                                >
+                                    <div>
+                                        <span
+                                            class="font-label-md text-label-md text-secondary uppercase font-semibold tracking-wider"
+                                            >Phiên tư vấn Telehealth</span
+                                        >
+                                        <h3
+                                            class="font-headline-sm text-headline-sm text-on-surface"
+                                            id="selected-doctor-title"
+                                        >
+                                            ThS. BS. Nguyễn Hoàng Nam
+                                        </h3>
+                                    </div>
+                                    <span
+                                        class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-medium"
+                                        id="selected-doctor-price"
+                                        >350.000đ / 45p</span
+                                    >
+                                </div>
+                                <!-- Date Selector (Weekly View) -->
+                                <div>
+                                    <label
+                                        class="font-label-lg text-label-lg text-on-surface block mb-2 font-medium"
+                                        >1. Chọn ngày tư vấn</label
+                                    >
+                                    <div class="grid grid-cols-5 gap-2">
+                                        <button
+                                            class="day-btn flex flex-col items-center p-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md text-center transition-all"
+                                            type="button"
+                                        >
+                                            <span class="text-[11px] opacity-80"
+                                                >Hôm nay</span
+                                            >
+                                            <span
+                                                class="font-semibold text-base mt-0.5"
+                                                >24</span
+                                            >
+                                            <span class="text-[11px]"
+                                                >Th 3</span
+                                            >
+                                        </button>
+                                        <button
+                                            class="day-btn flex flex-col items-center p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md text-center transition-all"
+                                            type="button"
+                                        >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Mai</span
+                                            >
+                                            <span
+                                                class="font-semibold text-base mt-0.5"
+                                                >25</span
+                                            >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Th 4</span
+                                            >
+                                        </button>
+                                        <button
+                                            class="day-btn flex flex-col items-center p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md text-center transition-all"
+                                            type="button"
+                                        >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Ngày kia</span
+                                            >
+                                            <span
+                                                class="font-semibold text-base mt-0.5"
+                                                >26</span
+                                            >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Th 5</span
+                                            >
+                                        </button>
+                                        <button
+                                            class="day-btn flex flex-col items-center p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md text-center transition-all"
+                                            type="button"
+                                        >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Tới</span
+                                            >
+                                            <span
+                                                class="font-semibold text-base mt-0.5"
+                                                >27</span
+                                            >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Th 6</span
+                                            >
+                                        </button>
+                                        <button
+                                            class="day-btn flex flex-col items-center p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md text-center transition-all"
+                                            type="button"
+                                        >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Cuối tuần</span
+                                            >
+                                            <span
+                                                class="font-semibold text-base mt-0.5"
+                                                >28</span
+                                            >
+                                            <span
+                                                class="text-[11px] text-outline"
+                                                >Th 7</span
+                                            >
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Time Slots -->
+                                <div>
+                                    <label
+                                        class="font-label-lg text-label-lg text-on-surface block mb-2 font-medium"
+                                        >2. Khung giờ trống</label
+                                    >
+                                    <div
+                                        class="grid grid-cols-4 gap-2"
+                                        id="time-slot-grid"
+                                    >
+                                        <button
+                                            class="slot-btn py-2 px-1 text-center rounded-lg bg-surface-container-low hover:bg-surface-variant font-label-md text-label-md text-on-surface transition-all"
+                                            type="button"
+                                        >
+                                            09:00
+                                        </button>
+                                        <button
+                                            class="slot-btn py-2 px-1 text-center rounded-lg bg-surface-container-low hover:bg-surface-variant font-label-md text-label-md text-on-surface transition-all"
+                                            type="button"
+                                        >
+                                            14:00
+                                        </button>
+                                        <button
+                                            class="slot-btn py-2 px-1 text-center rounded-lg bg-surface-container-low hover:bg-surface-variant font-label-md text-label-md text-on-surface transition-all"
+                                            type="button"
+                                        >
+                                            16:30
+                                        </button>
+                                        <button
+                                            class="slot-btn active-slot py-2 px-1 text-center rounded-lg bg-primary text-on-primary font-semibold font-label-md text-label-md transition-all"
+                                            type="button"
+                                        >
+                                            20:00
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Health & Food Log Sync Integration (PRD key requirement) -->
+                                <div
+                                    class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs"
+                                >
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <div
+                                            class="flex items-center gap-space-xs"
+                                        >
+                                            <span
+                                                class="material-symbols-outlined text-primary text-base"
+                                                >auto_graph</span
+                                            >
+                                            <span
+                                                class="font-label-lg text-label-lg text-on-surface font-semibold"
+                                                >Đồng bộ hồ sơ dinh dưỡng tự
+                                                động</span
+                                            >
+                                        </div>
+                                        <label
+                                            class="relative inline-flex items-center cursor-pointer"
+                                        >
+                                            <input
+                                                checked=""
+                                                class="sr-only peer"
+                                                id="sync-health-toggle"
+                                                type="checkbox"
+                                            />
+                                            <div
+                                                class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"
+                                            ></div>
+                                        </label>
+                                    </div>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-surface-variant text-[13px]"
+                                    >
+                                        Tự động chia sẻ biểu đồ Calo 7 ngày gần
+                                        nhất, nhật ký bữa ăn AI Food Log và chỉ
+                                        số TDEE (2,150 kcal), BMI (21.8) để bác
+                                        sĩ chuẩn bị trước phác đồ.
+                                    </p>
+                                    <!-- Snapshot preview pills -->
+                                    <div class="flex flex-wrap gap-1.5 pt-1">
+                                        <span
+                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-label-md text-label-md"
+                                        >
+                                            <span
+                                                class="w-1.5 h-1.5 rounded-full bg-secondary"
+                                            ></span>
+                                            7 ngày AI Log (21 bữa)
+                                        </span>
+                                        <span
+                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-label-md text-label-md"
+                                        >
+                                            <span
+                                                class="w-1.5 h-1.5 rounded-full bg-secondary"
+                                            ></span>
+                                            Macro: 45C / 30P / 25F
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Consultation Goal & Pre-notes -->
+                                <div>
+                                    <label
+                                        class="font-label-lg text-label-lg text-on-surface block mb-1.5 font-medium"
+                                        for="consult-note"
+                                        >3. Mục tiêu &amp; Triệu chứng cần cải
+                                        thiện</label
+                                    >
+                                    <textarea
+                                        class="w-full p-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all placeholder:text-outline resize-none"
+                                        id="consult-note"
+                                        placeholder="Ví dụ: Em muốn giảm 3kg mỡ bụng nhưng hay bị đầy hơi khi ăn yến mạch vào buổi sáng, tiền sử gia đình có người bị tiểu đường..."
+                                        rows="3"
+                                    ></textarea>
+                                </div>
+                                <!-- Format option -->
+                                <div
+                                    class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-1"
+                                >
+                                    <span class="flex items-center gap-1.5">
+                                        <span
+                                            class="material-symbols-outlined text-primary text-base"
+                                            >videocam</span
+                                        >
+                                        Hình thức: Tư vấn Video HD 1-1
+                                    </span>
+                                    <span
+                                        class="flex items-center gap-1.5 text-secondary font-medium"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-base"
+                                            >security</span
+                                        >
+                                        Bảo mật Y tế HIPPA
+                                    </span>
+                                </div>
+                                <!-- Submit CTA -->
+                                <button
+                                    class="w-full py-3 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-headline-sm text-headline-sm text-[16px] shadow-sm transition-all flex items-center justify-center gap-space-xs"
+                                    id="submit-booking-btn"
+                                    onclick="handleBookingSuccess()"
+                                >
+                                    <span
+                                        >Xác nhận đặt lịch &amp; Thanh toán an
+                                        toàn</span
+                                    >
+                                    <span
+                                        class="material-symbols-outlined text-lg"
+                                        >arrow_forward</span
+                                    >
+                                </button>
+                                <p
+                                    class="font-label-md text-label-md text-center text-outline -mt-1"
+                                >
+                                    Hoàn tiền 100% nếu chuyên gia không tham gia
+                                    phiên khám đúng hẹn.
+                                </p>
+                            </div>
+                            <!-- Quick Consultation Live Chat Box -->
+                            <div
+                                class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm"
+                                id="quick-chat-card"
+                            >
+                                <div
+                                    class="flex items-center justify-between pb-space-xs"
+                                >
+                                    <div class="flex items-center gap-space-xs">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"
+                                        >
+                                            <span
+                                                class="material-symbols-outlined text-base"
+                                                >chat</span
+                                            >
+                                        </div>
+                                        <div>
+                                            <h4
+                                                class="font-label-lg text-label-lg text-on-surface font-semibold"
+                                            >
+                                                Trao đổi nhanh trước hẹn
+                                            </h4>
+                                            <span
+                                                class="font-label-md text-label-md text-secondary"
+                                                >BS. Nguyễn Hoàng Nam đang
+                                                online</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="font-label-md text-label-md text-outline"
+                                        >Phiên #VN-8821</span
+                                    >
+                                </div>
+                                <!-- Chat History -->
+                                <div
+                                    class="flex flex-col gap-2 max-h-48 overflow-y-auto pr-1 py-1 text-[13px]"
+                                >
+                                    <div class="flex items-start gap-2">
+                                        <div
+                                            class="w-6 h-6 rounded-full bg-primary/20 shrink-0 flex items-center justify-center text-[10px] font-bold text-primary"
+                                        >
+                                            BS
+                                        </div>
+                                        <div
+                                            class="bg-surface-container-low p-2.5 rounded-xl rounded-tl-none max-w-[85%] text-on-surface"
+                                        >
+                                            Chào Minh Anh, bác sĩ đã nhận được
+                                            báo cáo calo tuần qua. Bữa tối hôm
+                                            qua em ăn tinh bột muộn đúng không?
+                                            <span
+                                                class="block text-[10px] text-outline mt-1"
+                                                >11:15 AM</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-start gap-2 justify-end"
+                                    >
+                                        <div
+                                            class="bg-primary text-on-primary p-2.5 rounded-xl rounded-tr-none max-w-[85%]"
+                                        >
+                                            Dạ đúng rồi ạ, hôm qua em tăng ca
+                                            nên 21:00 mới ăn cơm gạo lứt với ức
+                                            gà ạ.
+                                            <span
+                                                class="block text-[10px] text-primary-fixed mt-1 text-right"
+                                                >11:20 AM</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Chat input -->
+                                <div
+                                    class="flex items-center gap-space-xs pt-1"
+                                >
+                                    <input
+                                        class="flex-1 bg-surface-container-low px-3 py-2 rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest"
+                                        placeholder="Gửi câu hỏi hoặc ảnh xét nghiệm..."
+                                        type="text"
+                                    />
+                                    <button
+                                        class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-sm"
+                                            >send</span
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Booking Confirmation Success Modal (Hidden by default) -->
+                    <div
+                        class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4"
+                        id="booking-success-modal"
+                    >
+                        <div
+                            class="bg-surface-container-lowest max-w-md w-full rounded-2xl p-space-lg shadow-xl flex flex-col items-center text-center gap-space-md"
+                        >
+                            <div
+                                class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center"
+                            >
+                                <span
+                                    class="material-symbols-outlined text-4xl"
+                                    style="
+                                        font-variation-settings: &quot;FILL&quot;
+                                            1;
+                                    "
+                                    >check_circle</span
+                                >
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-headline-sm text-headline-sm text-on-surface"
+                                >
+                                    Đặt lịch tư vấn thành công!
+                                </h3>
+                                <p
+                                    class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                                >
+                                    Lịch hẹn của bạn với
+                                    <strong
+                                        class="text-primary font-semibold"
+                                        id="modal-doctor-name"
+                                        >ThS. BS. Nguyễn Hoàng Nam</strong
+                                    >
+                                    đã được xác nhận vào lúc
+                                    <strong id="modal-slot-time"
+                                        >20:00 - Hôm nay</strong
+                                    >.
+                                </p>
+                            </div>
+                            <div
+                                class="w-full bg-surface-container-low p-space-md rounded-xl text-left flex flex-col gap-2"
+                            >
+                                <div
+                                    class="flex justify-between font-label-md text-label-md"
+                                >
+                                    <span class="text-outline"
+                                        >Mã cuộc hẹn:</span
+                                    >
+                                    <span class="font-semibold text-on-surface"
+                                        >TELE-2024-9912</span
+                                    >
+                                </div>
+                                <div
+                                    class="flex justify-between font-label-md text-label-md"
+                                >
+                                    <span class="text-outline"
+                                        >Hồ sơ đồng bộ:</span
+                                    >
+                                    <span
+                                        class="text-secondary font-medium flex items-center gap-1"
+                                    >
+                                        <span
+                                            class="material-symbols-outlined text-xs"
+                                            >done_all</span
+                                        >
+                                        Đã gửi AI Food Log 7 ngày
+                                    </span>
+                                </div>
+                                <div
+                                    class="flex justify-between font-label-md text-label-md"
+                                >
+                                    <span class="text-outline">Hình thức:</span>
+                                    <span class="text-on-surface"
+                                        >Google Meet Y tế bảo mật</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex gap-space-sm w-full">
+                                <button
+                                    class="flex-1 py-2.5 bg-surface-container text-on-surface hover:bg-surface-container-high rounded-lg font-label-lg text-label-lg transition-colors"
+                                    onclick="closeModal()"
+                                >
+                                    Đóng
+                                </button>
+                                <button
+                                    class="flex-1 py-2.5 bg-primary text-on-primary hover:bg-primary-container rounded-lg font-label-lg text-label-lg transition-colors"
+                                    onclick="closeModal()"
+                                >
+                                    Xem lịch hẹn
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    // Slot selection interactive script
+                    function selectDoctorSlot(name, price, time) {
+                        document.getElementById(
+                            "selected-doctor-title",
+                        ).innerText = name;
+                        document.getElementById(
+                            "selected-doctor-price",
+                        ).innerText = price + " / 45p";
+
+                        // Highlight time button in panel
+                        const buttons = document.querySelectorAll(
+                            "#time-slot-grid button",
+                        );
+                        buttons.forEach((btn) => {
+                            if (btn.innerText.includes(time)) {
+                                btn.classList.add(
+                                    "bg-primary",
+                                    "text-on-primary",
+                                    "font-semibold",
+                                );
+                                btn.classList.remove(
+                                    "bg-surface-container-low",
+                                    "text-on-surface",
+                                );
+                            } else {
+                                btn.classList.remove(
+                                    "bg-primary",
+                                    "text-on-primary",
+                                    "font-semibold",
+                                );
+                                btn.classList.add(
+                                    "bg-surface-container-low",
+                                    "text-on-surface",
+                                );
+                            }
+                        });
+
+                        // Smooth scroll to booking panel on mobile
+                        const panel =
+                            document.getElementById("booking-container");
+                        if (window.innerWidth < 1280) {
+                            panel.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            });
+                        }
+                    }
+
+                    function openBookingPanel(name, price, specialty) {
+                        document.getElementById(
+                            "selected-doctor-title",
+                        ).innerText = name;
+                        document.getElementById(
+                            "selected-doctor-price",
+                        ).innerText = price;
+                        const panel =
+                            document.getElementById("booking-container");
+                        panel.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                        });
+                    }
+
+                    // Handle Day buttons toggle
+                    document.querySelectorAll(".day-btn").forEach((btn) => {
+                        btn.addEventListener("click", function () {
+                            document
+                                .querySelectorAll(".day-btn")
+                                .forEach((b) => {
+                                    b.classList.remove(
+                                        "bg-primary",
+                                        "text-on-primary",
+                                    );
+                                    b.classList.add(
+                                        "bg-surface-container-low",
+                                        "text-on-surface",
+                                    );
+                                });
+                            this.classList.add("bg-primary", "text-on-primary");
+                            this.classList.remove(
+                                "bg-surface-container-low",
+                                "text-on-surface",
+                            );
+                        });
+                    });
+
+                    // Handle Time buttons toggle
+                    document.querySelectorAll(".slot-btn").forEach((btn) => {
+                        btn.addEventListener("click", function () {
+                            document
+                                .querySelectorAll(".slot-btn")
+                                .forEach((b) => {
+                                    b.classList.remove(
+                                        "bg-primary",
+                                        "text-on-primary",
+                                        "font-semibold",
+                                    );
+                                    b.classList.add(
+                                        "bg-surface-container-low",
+                                        "text-on-surface",
+                                    );
+                                });
+                            this.classList.add(
+                                "bg-primary",
+                                "text-on-primary",
+                                "font-semibold",
+                            );
+                            this.classList.remove(
+                                "bg-surface-container-low",
+                                "text-on-surface",
+                            );
+                        });
+                    });
+
+                    // Handle Chips toggle
+                    document
+                        .querySelectorAll(".filter-chip")
+                        .forEach((chip) => {
+                            chip.addEventListener("click", function () {
+                                document
+                                    .querySelectorAll(".filter-chip")
+                                    .forEach((c) => {
+                                        c.classList.remove(
+                                            "bg-primary",
+                                            "text-on-primary",
+                                        );
+                                        c.classList.add(
+                                            "bg-surface-container",
+                                            "text-on-surface-variant",
+                                        );
+                                    });
+                                this.classList.add(
+                                    "bg-primary",
+                                    "text-on-primary",
+                                );
+                                this.classList.remove(
+                                    "bg-surface-container",
+                                    "text-on-surface-variant",
+                                );
+                            });
+                        });
+
+                    // Modal Handlers
+                    function handleBookingSuccess() {
+                        const doctorName = document.getElementById(
+                            "selected-doctor-title",
+                        ).innerText;
+                        document.getElementById("modal-doctor-name").innerText =
+                            doctorName;
+                        const modal = document.getElementById(
+                            "booking-success-modal",
+                        );
+                        modal.classList.remove("hidden");
+                        modal.classList.add("flex");
+                    }
+
+                    function closeModal() {
+                        const modal = document.getElementById(
+                            "booking-success-modal",
+                        );
+                        modal.classList.add("hidden");
+                        modal.classList.remove("flex");
+                    }
+
+                    function toggleQuickChat() {
+                        const chat = document.getElementById("quick-chat-card");
+                        chat.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                        });
+                        chat.classList.add("ring-2", "ring-primary");
+                        setTimeout(() => {
+                            chat.classList.remove("ring-2", "ring-primary");
+                        }, 1500);
+                    }
+
+                    // Tải thông tin người dùng từ Supabase
+                    document.addEventListener("DOMContentLoaded", async () => {
+                        if (window.APP_SUPABASE && window.APP_SUPABASE.getCurrentUser) {
+                            try {
+                                const user = await window.APP_SUPABASE.getCurrentUser();
+                                if (user) {
+                                    const displayName = user.user_metadata?.full_name || user.email.split("@")[0];
+                                    const avatarUrl = user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}`;
+                                    const nameEl = document.getElementById("user-display-name");
+                                    if (nameEl) nameEl.innerText = displayName;
+                                    const roleEl = document.getElementById("user-role-badge");
+                                    if (roleEl) roleEl.innerText = user.email;
+                                    const avatarEl = document.getElementById("user-avatar-container");
+                                    if (avatarEl) {
+                                        avatarEl.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="w-full h-full object-cover" />`;
+                                    }
+                                }
+                            } catch (err) {
+                                console.warn("Lỗi đọc user:", err);
+                            }
+                        }
+                    });
+                </script>
+            </main>
+        </div>
+    </body>
+</html>
