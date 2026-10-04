@@ -154,12 +154,15 @@
                 class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"
             >
                 <div class="flex items-center gap-space-sm">
-                    <img
-                        alt="HealthPulse Logo"
-                        class="h-8 w-auto object-contain"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DnTMRBUDBO-8uF8NUMq6W2Lxc0dy_kUdSDcmMeHQ4DkxvqBWiMMUOJ17klsD_ixxHAC6o-ct4GtWbMdSjEjNOEQfUH0kD7kkYclnIlz8E2RMrkHQqzL9QTaVfjKOGxev6uZhGBiD2WRfwA8IN3tIDy09PDZbecge4gf2hevW-PgICxGUnve1IH7gxwUttV9FL8NtWIW35H-6SegjS0wPvB2gfLQz9c2ySmfK1fxaZ2Bo1pn0xHQ3Zg"
-                    /><span
-                        class="text-headline-sm font-headline-sm text-primary"
+                    <div
+                        class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm shrink-0"
+                    >
+                        <span class="material-symbols-outlined text-[20px]"
+                            >health_and_safety</span
+                        >
+                    </div>
+                    <span
+                        class="text-headline-sm font-headline-sm text-primary font-bold"
                         >HealthPulse</span
                     >
                 </div>
@@ -743,7 +746,7 @@
                                 <img src="${avatar}" alt="${name}" class="w-8 h-8 rounded-full border border-primary/20 object-cover" />
                                 <span class="font-label-lg text-on-surface font-medium hidden sm:inline">${name}</span>
                             </a>
-                            <button onclick="window.APP_SUPABASE.signOutUser()" class="px-space-sm py-1 rounded-lg border border-outline/30 text-on-surface-variant hover:bg-error-container hover:text-error text-label-md transition-colors" title="Đăng xuất">
+                            <button onclick="handleLogout()" class="px-space-sm py-1 rounded-lg border border-outline/30 text-on-surface-variant hover:bg-error-container hover:text-error text-label-md transition-colors" title="Đăng xuất">
                                 Đăng xuất
                             </button>
                         `;
@@ -751,5 +754,6 @@
                 }
             });
         </script>
+        <script src="./chatbase.js"></script>
     </body>
 </html>

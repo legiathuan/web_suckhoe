@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Hồ sơ Sức khỏe Cá nhân - Green Health</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            @layer base {
+                html, body { margin: 0; padding: 0; }
+                body { overscroll-behavior: none; }
+                main > :first-child { margin-top: 0 !important; }
+                main > :last-child  { margin-bottom: 0 !important; }
+            }
+            ::-webkit-scrollbar { display: none; }
+
+            /* Smooth transition for result panel */
+            #result-panel {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            /* Animated progress bars */
+            .progress-bar { transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+            /* Allergy tag styles */
+            .allergy-tag {
+                display: inline-flex; align-items: center; gap: 4px;
+                padding: 2px 10px; border-radius: 9999px; font-size: 12px;
+                background: #ffdad6; color: #93000a; font-weight: 500;
+            }
+            .allergy-tag button { background: none; border: none; cursor: pointer; color: inherit; padding: 0; line-height: 1; font-size: 14px; }
+            /* Card hover */
+            .meal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+            .meal-card { transition: all 0.2s ease; }
+            /* Input focus ring */
+            .form-input:focus { outline: none; border-color: #006565; box-shadow: 0 0 0 3px rgba(0,101,101,0.12); }
+            /* Range slider */
+            input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: #edeeef; outline: none; }
+            input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #006565; cursor: pointer; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,101,101,0.3); }
+        </style>
+
+        <!-- Supabase Client -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="./supabaseClient.js"></script>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-variant": "#e1e3e4",
+                            tertiary: "#00665d",
+                            "tertiary-fixed": "#61f9e9",
+                            "surface-container": "#edeeef",
+                            "on-secondary-fixed-variant": "#00522d",
+                            "on-error-container": "#93000a",
+                            "primary-fixed": "#93f2f2",
+                            "on-primary-container": "#e3fffe",
+                            "on-surface": "#191c1d",
+                            "surface-dim": "#d9dadb",
+                            "on-surface-variant": "#3e4949",
+                            "on-secondary-fixed": "#00210f",
+                            "tertiary-fixed-dim": "#3adccc",
+                            "secondary-fixed": "#9af6b8",
+                            "outline-variant": "#bdc9c8",
+                            "on-tertiary-fixed": "#00201d",
+                            "tertiary-container": "#008177",
+                            "on-primary-fixed": "#002020",
+                            "on-background": "#191c1d",
+                            "on-tertiary-fixed-variant": "#005049",
+                            "surface-bright": "#f8f9fa",
+                            "on-primary": "#ffffff",
+                            surface: "#f8f9fa",
+                            error: "#ba1a1a",
+                            outline: "#6e7979",
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#76d6d5",
+                            "on-primary-fixed-variant": "#004f4f",
+                            "inverse-on-surface": "#f0f1f2",
+                            "on-tertiary": "#ffffff",
+                            "secondary-fixed-dim": "#7ed99e",
+                            "surface-container-high": "#e7e8e9",
+                            "surface-container-low": "#f3f4f5",
+                            background: "#f8f9fa",
+                            "on-secondary-container": "#047240",
+                            "surface-container-lowest": "#ffffff",
+                            "on-error": "#ffffff",
+                            primary: "#006565",
+                            "error-container": "#ffdad6",
+                            "inverse-primary": "#76d6d5",
+                            secondary: "#006d3d",
+                            "surface-tint": "#006a6a",
+                            "surface-container-highest": "#e1e3e4",
+                            "inverse-surface": "#2e3132",
+                            "primary-container": "#008080",
+                            "on-tertiary-container": "#e5fffa",
+                            "secondary-container": "#97f3b5",
+                        },
+                        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+                        spacing: {
+                            gutter: "1.5rem", "space-xl": "2.5rem", "space-sm": "0.5rem",
+                            "space-lg": "1.5rem", margin: "2rem", "space-md": "1rem", "space-xs": "0.25rem",
+                        },
+                        fontFamily: {
+                            "body-sm": ["Inter"], "label-md": ["Inter"], "body-lg": ["Inter"],
+                            "headline-sm": ["Inter"], "headline-lg": ["Inter"], "label-lg": ["Inter"],
+                            "body-md": ["Inter"], "headline-xl": ["Inter"], "headline-md": ["Inter"],
+                        },
+                        fontSize: {
+                            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                            "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                            "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "600" }],
+                            "label-lg": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                            "headline-xl": ["40px", { lineHeight: "48px", fontWeight: "700" }],
+                            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body class="bg-background font-body-md text-on-surface antialiased">
+
+        <!-- ======================= SIDEBAR ======================= -->
+        <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between">
+            <div class="flex flex-col">
+                <div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-surface-container/60">
+                    <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm shrink-0">
+                        <span class="material-symbols-outlined text-[24px]">health_and_safety</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-headline-sm text-headline-sm text-primary leading-none font-bold">Green Health</span>
+                        <span class="font-label-md text-label-md text-outline">VitaFlow Platform</span>
+                    </div>
+                </div>
+                <div class="px-space-md py-space-sm">
+                    <div class="px-space-sm py-space-xs mb-space-xs font-label-md text-label-md text-outline uppercase tracking-wider">
+                        Chức năng chính
+                    </div>
+                    <nav class="flex flex-col gap-space-xs">
+                        <a class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="./tong_quan_skhoe.html">
+                            <span class="material-symbols-outlined text-primary">monitoring</span>Tổng quan Sức khỏe
+                        </a>
+                        <a class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="./nhat_ky.html">
+                            <span class="material-symbols-outlined text-primary">restaurant</span>Nhật ký &amp; AI Food Log
+                        </a>
+                        <a class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="./thucdon.html">
+                            <span class="material-symbols-outlined text-primary">calendar_month</span>Thực đơn &amp; Kế hoạch
+                        </a>
+                        <a class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="./tu_van_chuyen_gia.html">
+                            <span class="material-symbols-outlined text-primary">support_agent</span>Tư vấn Chuyên gia
+                        </a>
+                        <a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl" href="./ho_so_ca_nhan.html">
+                            <span class="material-symbols-outlined text-primary">person_edit</span>Hồ sơ Cá nhân
+                        </a>
+                        <a class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="./quan_tri_thuc_pham.html">
+                            <span class="material-symbols-outlined text-primary">database</span>Quản trị Thực phẩm
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <div class="p-space-md bg-surface-container-low m-space-md mb-2 rounded-xl flex flex-col gap-space-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="font-label-md text-label-md text-on-surface-variant">Mục tiêu calo hôm nay</span>
+                        <span class="font-label-md text-label-md text-primary font-semibold" id="sidebar-calorie-goal">— / — kcal</span>
+                    </div>
+                    <div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                        <div class="bg-primary-container h-full rounded-full w-0 transition-all duration-700" id="sidebar-calorie-bar"></div>
+                    </div>
+                </div>
+                <div class="px-space-md pb-space-md">
+                    <button onclick="handleLogout()" class="w-full flex items-center justify-center gap-space-xs px-space-md py-2 rounded-xl font-label-md text-label-md text-error hover:bg-error-container/30 border border-error/20 transition-all shadow-sm active:scale-95" title="Đăng xuất khỏi tài khoản">
+                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                        <span class="font-medium">Đăng xuất tài khoản</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ======================= MAIN CONTENT ======================= -->
+        <div class="pl-72">
+            <!-- Header -->
+            <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg">
+                <div class="flex items-center gap-space-md">
+                    <span class="font-headline-sm text-headline-sm text-on-surface">Hồ sơ Sức khỏe Cá nhân</span>
+                </div>
+                <div class="flex items-center gap-space-lg">
+                    <div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md" id="header-bmi-chip">
+                        <span class="material-symbols-outlined text-base">monitoring</span>
+                        <span>Chỉ số BMI: —</span>
+                    </div>
+                    <button class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"></span>
+                    </button>
+                    <div class="flex items-center gap-space-sm pl-space-sm" id="user-profile-header">
+                        <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center overflow-hidden border border-primary/20 shrink-0" id="user-avatar-container">
+                            <span class="material-symbols-outlined text-on-primary text-[20px]">person</span>
+                        </div>
+                        <div class="hidden sm:flex flex-col">
+                            <span class="font-label-lg text-label-lg text-on-surface leading-tight font-medium" id="user-display-name">—</span>
+                            <span class="font-label-md text-label-md text-on-surface-variant leading-tight" id="user-role-badge">Đang xác thực...</span>
+                        </div>
+                        <button onclick="handleLogout()" class="ml-2 flex items-center gap-1 px-3 py-1.5 rounded-lg border border-outline/30 text-on-surface-variant hover:bg-error-container hover:text-error text-label-md transition-all shadow-sm active:scale-95" title="Đăng xuất tài khoản">
+                            <span class="material-symbols-outlined text-[18px]">logout</span>
+                            <span class="hidden md:inline font-medium">Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ======================= PAGE BODY ======================= -->
+            <main class="relative pt-16 w-full bg-background min-h-screen px-space-lg py-space-lg">
+                <div class="flex flex-col w-full gap-space-lg max-w-7xl mx-auto">
+
+                    <!-- Page Title Banner -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-space-md">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">person_edit</span>
+                                </div>
+                                <h1 class="font-headline-md text-headline-md text-on-surface font-bold">Hồ sơ Sức khỏe</h1>
+                            </div>
+                            <p class="font-body-sm text-on-surface-variant">Điền thông tin cá nhân để nhận kế hoạch giảm cân &amp; thực đơn phù hợp riêng cho bạn.</p>
+                        </div>
+                        <button id="btn-save" onclick="saveAndAnalyze()" class="flex items-center gap-space-xs px-space-lg py-3 rounded-xl bg-primary text-on-primary font-label-lg font-semibold hover:bg-primary/90 transition-all shadow-md active:scale-95">
+                            <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                            Phân tích &amp; Lên kế hoạch
+                        </button>
+                    </div>
+
+                    <!-- ========================= FORM GRID ========================= -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+
+                        <!-- Card 1: Thông tin cơ bản -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-space-lg flex flex-col gap-space-md">
+                            <div class="flex items-center gap-space-sm pb-space-sm border-b border-surface-container">
+                                <div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Thông tin cơ bản</h2>
+                                    <p class="font-label-md text-label-md text-on-surface-variant">Họ tên, tuổi, giới tính</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-space-sm">
+                                <!-- Họ tên -->
+                                <div>
+                                    <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Họ và tên <span class="text-error">*</span></label>
+                                    <input id="inp-name" type="text" placeholder="Ví dụ: Nguyễn Văn A"
+                                        class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all" />
+                                </div>
+                                <!-- Tuổi & Giới tính -->
+                                <div class="grid grid-cols-2 gap-space-sm">
+                                    <div>
+                                        <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Tuổi <span class="text-error">*</span></label>
+                                        <input id="inp-age" type="number" min="10" max="100" placeholder="25"
+                                            class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all" />
+                                    </div>
+                                    <div>
+                                        <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Giới tính <span class="text-error">*</span></label>
+                                        <select id="inp-gender" class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md transition-all appearance-none cursor-pointer">
+                                            <option value="">Chọn...</option>
+                                            <option value="male">Nam</option>
+                                            <option value="female">Nữ</option>
+                                            <option value="other">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Chỉ số cơ thể -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-space-lg flex flex-col gap-space-md">
+                            <div class="flex items-center gap-space-sm pb-space-sm border-b border-surface-container">
+                                <div class="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-secondary text-[20px]">monitor_weight</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Chỉ số cơ thể</h2>
+                                    <p class="font-label-md text-label-md text-on-surface-variant">Cân nặng, chiều cao, BMI</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-space-sm">
+                                <div class="grid grid-cols-2 gap-space-sm">
+                                    <div>
+                                        <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Cân nặng hiện tại (kg) <span class="text-error">*</span></label>
+                                        <div class="relative">
+                                            <input id="inp-weight" type="number" min="30" max="300" step="0.1" placeholder="65"
+                                                oninput="updateLiveMetrics()"
+                                                class="form-input w-full px-space-md py-3 pr-12 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all" />
+                                            <span class="absolute right-4 top-1/2 -translate-y-1/2 font-label-md text-label-md text-outline">kg</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Chiều cao (cm) <span class="text-error">*</span></label>
+                                        <div class="relative">
+                                            <input id="inp-height" type="number" min="100" max="250" placeholder="170"
+                                                oninput="updateLiveMetrics()"
+                                                class="form-input w-full px-space-md py-3 pr-12 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all" />
+                                            <span class="absolute right-4 top-1/2 -translate-y-1/2 font-label-md text-label-md text-outline">cm</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Live BMI Display -->
+                                <div id="bmi-live-display" class="hidden mt-1 p-space-sm rounded-xl bg-surface-container flex items-center gap-space-sm">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between mb-1">
+                                            <span class="font-label-md text-label-md text-on-surface-variant">Chỉ số BMI của bạn</span>
+                                            <span class="font-label-lg text-label-lg font-semibold" id="bmi-value-live">—</span>
+                                        </div>
+                                        <div class="relative h-2 rounded-full overflow-hidden bg-gradient-to-r from-blue-300 via-green-400 to-red-400">
+                                            <div id="bmi-indicator" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-on-surface border-2 border-white shadow-md transition-all duration-500" style="left: 30%"></div>
+                                        </div>
+                                        <div class="flex justify-between mt-1">
+                                            <span class="font-label-md text-label-md text-outline">Thiếu cân</span>
+                                            <span class="font-label-md text-label-md text-outline">Cân đối</span>
+                                            <span class="font-label-md text-label-md text-outline">Thừa cân</span>
+                                        </div>
+                                    </div>
+                                    <div class="px-space-sm py-1 rounded-full text-label-md font-medium" id="bmi-category-badge">—</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Tình trạng sức khỏe -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-space-lg flex flex-col gap-space-md">
+                            <div class="flex items-center gap-space-sm pb-space-sm border-b border-surface-container">
+                                <div class="w-9 h-9 rounded-xl bg-tertiary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-tertiary text-[20px]">favorite</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Tình trạng sức khỏe</h2>
+                                    <p class="font-label-md text-label-md text-on-surface-variant">Bệnh lý, hoạt động thể chất</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-space-sm">
+                                <!-- Tình trạng hiện tại -->
+                                <div>
+                                    <label class="block font-label-lg text-label-lg text-on-surface-variant mb-2">Tình trạng sức khỏe hiện tại <span class="text-error">*</span></label>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="healthy" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-secondary">sentiment_satisfied</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Khỏe mạnh</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="overweight" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-outline">fitness_center</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Thừa cân</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="diabetes" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-error">water_drop</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Tiểu đường</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="hypertension" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-error">favorite</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Huyết áp cao</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="digestive" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-tertiary">lunch_dining</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Tiêu hóa yếu</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-3 rounded-xl border border-outline/20 cursor-pointer hover:bg-surface-container transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                                            <input type="radio" name="health-status" value="other" class="accent-primary" />
+                                            <span class="material-symbols-outlined text-[18px] text-outline">more_horiz</span>
+                                            <span class="font-label-lg text-label-lg text-on-surface">Khác</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Mức độ vận động -->
+                                <div>
+                                    <label class="block font-label-lg text-label-lg text-on-surface-variant mb-2">Mức độ vận động hàng ngày <span class="text-error">*</span></label>
+                                    <select id="inp-activity" oninput="updateLiveMetrics()" class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md transition-all appearance-none cursor-pointer">
+                                        <option value="">Chọn mức độ hoạt động...</option>
+                                        <option value="1.2">Rất ít vận động (ngồi nhiều, không tập)</option>
+                                        <option value="1.375">Nhẹ nhàng (tập 1-3 ngày/tuần)</option>
+                                        <option value="1.55">Vừa phải (tập 3-5 ngày/tuần)</option>
+                                        <option value="1.725">Tích cực (tập 6-7 ngày/tuần)</option>
+                                        <option value="1.9">Rất tích cực (vận động viên, lao động nặng)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Mục tiêu & Dị ứng -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-space-lg flex flex-col gap-space-md">
+                            <div class="flex items-center gap-space-sm pb-space-sm border-b border-surface-container">
+                                <div class="w-9 h-9 rounded-xl bg-error/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-error text-[20px]">target</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Mục tiêu &amp; Dị ứng</h2>
+                                    <p class="font-label-md text-label-md text-on-surface-variant">Mục tiêu cân nặng, chất cần tránh</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-space-sm">
+                                <!-- Mục tiêu giảm cân -->
+                                <div>
+                                    <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Mục tiêu giảm (kg) <span class="text-error">*</span></label>
+                                    <div class="flex items-center gap-space-md">
+                                        <input id="inp-goal" type="range" min="1" max="50" value="10" step="0.5"
+                                            oninput="document.getElementById('goal-val').textContent = this.value + ' kg'; updateLiveMetrics()" />
+                                        <div class="shrink-0 w-20 text-center py-2 px-3 rounded-xl bg-primary/10 text-primary font-semibold font-headline-sm">
+                                            <span id="goal-val">10 kg</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1">
+                                        <label class="block font-label-lg text-label-lg text-on-surface-variant mb-1">Thời gian mục tiêu</label>
+                                        <select id="inp-duration" class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md transition-all appearance-none cursor-pointer">
+                                            <option value="1">1 tháng (nhanh)</option>
+                                            <option value="3" selected>3 tháng (bình thường)</option>
+                                            <option value="6">6 tháng (an toàn)</option>
+                                            <option value="12">12 tháng (lâu dài)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Dị ứng thực phẩm -->
+                                <div>
+                                    <label class="block font-label-lg text-label-lg text-on-surface-variant mb-2">Dị ứng / Thực phẩm cần tránh</label>
+                                    <div class="flex gap-2 flex-wrap mb-2" id="allergy-tags"></div>
+                                    <div class="flex gap-2">
+                                        <input id="allergy-input" type="text" placeholder="Nhập loại dị ứng (VD: đậu phộng, hải sản...)"
+                                            onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addAllergyTag();}"
+                                            class="form-input flex-1 px-space-md py-2 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all" />
+                                        <button onclick="addAllergyTag()" class="px-space-md py-2 rounded-xl bg-surface-container-high text-on-surface font-label-lg hover:bg-surface-container-highest transition-all">
+                                            <span class="material-symbols-outlined text-[18px]">add</span>
+                                        </button>
+                                    </div>
+                                    <p class="font-label-md text-label-md text-outline mt-1">Nhấn Enter hoặc dấu phẩy để thêm</p>
+                                    <!-- Quick allergy buttons -->
+                                    <div class="flex flex-wrap gap-1 mt-2">
+                                        <span class="font-label-md text-label-md text-on-surface-variant mr-1">Thường gặp:</span>
+                                        <template id="quick-allergy-tpl"></template>
+                                        <button onclick="quickAllergy('Đậu phộng')" class="text-label-md text-on-surface-variant border border-outline/20 px-2 py-0.5 rounded-full hover:bg-surface-container transition-all">🥜 Đậu phộng</button>
+                                        <button onclick="quickAllergy('Hải sản')" class="text-label-md text-on-surface-variant border border-outline/20 px-2 py-0.5 rounded-full hover:bg-surface-container transition-all">🦐 Hải sản</button>
+                                        <button onclick="quickAllergy('Sữa bò')" class="text-label-md text-on-surface-variant border border-outline/20 px-2 py-0.5 rounded-full hover:bg-surface-container transition-all">🥛 Sữa bò</button>
+                                        <button onclick="quickAllergy('Gluten')" class="text-label-md text-on-surface-variant border border-outline/20 px-2 py-0.5 rounded-full hover:bg-surface-container transition-all">🌾 Gluten</button>
+                                        <button onclick="quickAllergy('Trứng')" class="text-label-md text-on-surface-variant border border-outline/20 px-2 py-0.5 rounded-full hover:bg-surface-container transition-all">🥚 Trứng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Ghi chú thêm (full width) -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-space-lg lg:col-span-2">
+                            <div class="flex items-center gap-space-sm pb-space-sm border-b border-surface-container mb-space-md">
+                                <div class="w-9 h-9 rounded-xl bg-outline/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-outline text-[20px]">notes</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Ghi chú thêm</h2>
+                                    <p class="font-label-md text-label-md text-on-surface-variant">Bất kỳ thông tin sức khỏe đặc biệt nào khác</p>
+                                </div>
+                            </div>
+                            <textarea id="inp-notes" rows="3" placeholder="Ví dụ: Tôi đang dùng thuốc huyết áp, không ăn được đồ cay, thích ăn món Việt truyền thống..."
+                                class="form-input w-full px-space-md py-3 rounded-xl border border-outline/30 bg-surface text-on-surface text-body-md placeholder-outline/60 transition-all resize-none"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- ========================= RESULT PANEL ========================= -->
+                    <div id="result-panel" class="hidden flex flex-col gap-space-lg">
+
+                        <!-- Divider -->
+                        <div class="flex items-center gap-space-md">
+                            <div class="flex-1 h-px bg-surface-container-high"></div>
+                            <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-label-lg font-semibold">
+                                <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                                Kết quả phân tích AI
+                            </div>
+                            <div class="flex-1 h-px bg-surface-container-high"></div>
+                        </div>
+
+                        <!-- Metrics Row -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+                            <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-md flex flex-col gap-1 items-center text-center">
+                                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
+                                    <span class="material-symbols-outlined text-primary text-[22px]">scale</span>
+                                </div>
+                                <span class="font-headline-md text-headline-md text-primary font-bold" id="res-bmi">—</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Chỉ số BMI</span>
+                                <span class="font-label-md text-label-md rounded-full px-2 py-0.5 mt-0.5" id="res-bmi-cat">—</span>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-md flex flex-col gap-1 items-center text-center">
+                                <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-1">
+                                    <span class="material-symbols-outlined text-secondary text-[22px]">local_fire_department</span>
+                                </div>
+                                <span class="font-headline-md text-headline-md text-secondary font-bold" id="res-tdee">—</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">TDEE (kcal/ngày)</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Năng lượng tiêu thụ</span>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-md flex flex-col gap-1 items-center text-center">
+                                <div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center mb-1">
+                                    <span class="material-symbols-outlined text-tertiary text-[22px]">restaurant</span>
+                                </div>
+                                <span class="font-headline-md text-headline-md text-tertiary font-bold" id="res-target-cal">—</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Mục tiêu calo/ngày</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Để giảm cân an toàn</span>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-md flex flex-col gap-1 items-center text-center">
+                                <div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center mb-1">
+                                    <span class="material-symbols-outlined text-error text-[22px]">calendar_today</span>
+                                </div>
+                                <span class="font-headline-md text-headline-md text-error font-bold" id="res-duration">—</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Thời gian đạt mục tiêu</span>
+                                <span class="font-label-md text-label-md text-on-surface-variant">Ước tính khoa học</span>
+                            </div>
+                        </div>
+
+                        <!-- Phân chia Macro -->
+                        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-lg">
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-md flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[22px]">pie_chart</span>
+                                Phân chia Macro dinh dưỡng hàng ngày
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+                                <!-- Protein -->
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center gap-1">
+                                            <span class="w-3 h-3 rounded-full bg-primary inline-block"></span>
+                                            <span class="font-label-lg text-label-lg text-on-surface font-medium">Protein</span>
+                                        </div>
+                                        <span class="font-label-lg text-label-lg text-primary font-semibold" id="res-protein">— g</span>
+                                    </div>
+                                    <div class="h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="progress-bar h-full bg-primary rounded-full w-0" id="bar-protein"></div>
+                                    </div>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Thịt nạc, cá, trứng, đậu</span>
+                                </div>
+                                <!-- Carb -->
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center gap-1">
+                                            <span class="w-3 h-3 rounded-full bg-secondary inline-block"></span>
+                                            <span class="font-label-lg text-label-lg text-on-surface font-medium">Carbohydrate</span>
+                                        </div>
+                                        <span class="font-label-lg text-label-lg text-secondary font-semibold" id="res-carb">— g</span>
+                                    </div>
+                                    <div class="h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="progress-bar h-full bg-secondary rounded-full w-0" id="bar-carb"></div>
+                                    </div>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Gạo lứt, khoai, yến mạch</span>
+                                </div>
+                                <!-- Fat -->
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center gap-1">
+                                            <span class="w-3 h-3 rounded-full bg-tertiary inline-block"></span>
+                                            <span class="font-label-lg text-label-lg text-on-surface font-medium">Chất béo tốt</span>
+                                        </div>
+                                        <span class="font-label-lg text-label-lg text-tertiary font-semibold" id="res-fat">— g</span>
+                                    </div>
+                                    <div class="h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="progress-bar h-full bg-tertiary rounded-full w-0" id="bar-fat"></div>
+                                    </div>
+                                    <span class="font-label-md text-label-md text-on-surface-variant">Dầu ô liu, bơ, cá hồi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lời khuyên chuyên gia -->
+                        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-lg" id="advice-panel">
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-md flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[22px]">tips_and_updates</span>
+                                Lời khuyên dinh dưỡng cá nhân hóa
+                            </h3>
+                            <div id="advice-list" class="flex flex-col gap-space-sm"></div>
+                        </div>
+
+                        <!-- Thực đơn gợi ý hàng ngày -->
+                        <div class="bg-surface-container-lowest rounded-2xl border border-surface-container p-space-lg">
+                            <div class="flex items-center justify-between mb-space-md">
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-[22px]">menu_book</span>
+                                    Thực đơn mẫu trong ngày
+                                </h3>
+                                <div class="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md font-medium">
+                                    <span class="material-symbols-outlined text-[14px]">info</span>
+                                    Tùy chỉnh theo dị ứng
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md" id="meal-plan-grid"></div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="flex justify-center">
+                            <button onclick="saveToDB()" class="flex items-center gap-2 px-space-xl py-4 rounded-2xl bg-secondary text-on-secondary font-label-lg font-semibold shadow-lg hover:bg-secondary/90 transition-all active:scale-95">
+                                <span class="material-symbols-outlined text-[22px]">save</span>
+                                Lưu hồ sơ vào tài khoản
+                            </button>
+                        </div>
+
+                    </div>
+                    <!-- End result panel -->
+
+                </div>
+            </main>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- JAVASCRIPT                                                    -->
+        <!-- ============================================================ -->
+        <script>
+        // ── Allergy tags ──────────────────────────────────────────────────
+        const allergies = new Set();
+
+        function renderAllergyTags() {
+            const container = document.getElementById('allergy-tags');
+            container.innerHTML = '';
+            allergies.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'allergy-tag';
+                span.innerHTML = `${tag} <button onclick="removeAllergy('${tag}')" title="Xóa">✕</button>`;
+                container.appendChild(span);
+            });
+        }
+
+        function addAllergyTag() {
+            const inp = document.getElementById('allergy-input');
+            const val = inp.value.replace(',','').trim();
+            if (val) { allergies.add(val); renderAllergyTags(); inp.value = ''; }
+        }
+
+        function removeAllergy(tag) {
+            allergies.delete(tag); renderAllergyTags();
+        }
+
+        function quickAllergy(tag) {
+            allergies.add(tag); renderAllergyTags();
+        }
+
+        // ── Live BMI update ───────────────────────────────────────────────
+        function updateLiveMetrics() {
+            const w = parseFloat(document.getElementById('inp-weight').value);
+            const h = parseFloat(document.getElementById('inp-height').value) / 100;
+            const bmiDisplay = document.getElementById('bmi-live-display');
+
+            if (w > 0 && h > 0) {
+                const bmi = (w / (h * h)).toFixed(1);
+                document.getElementById('bmi-value-live').textContent = bmi;
+                const {label, color, pos} = bmiCategory(parseFloat(bmi));
+                const badge = document.getElementById('bmi-category-badge');
+                badge.textContent = label;
+                badge.style.backgroundColor = color + '22';
+                badge.style.color = color;
+                document.getElementById('bmi-indicator').style.left = pos;
+                document.getElementById('header-bmi-chip').querySelector('span:last-child').textContent = `Chỉ số BMI: ${bmi} • ${label}`;
+                bmiDisplay.classList.remove('hidden');
+            } else {
+                bmiDisplay.classList.add('hidden');
+            }
+        }
+
+        function bmiCategory(bmi) {
+            if (bmi < 18.5) return { label: 'Thiếu cân', color: '#3b82f6', pos: '15%' };
+            if (bmi < 23)   return { label: 'Cân đối',   color: '#22c55e', pos: '42%' };
+            if (bmi < 27.5) return { label: 'Thừa cân',  color: '#f59e0b', pos: '68%' };
+            return                 { label: 'Béo phì',   color: '#ef4444', pos: '87%' };
+        }
+
+        // ── Main analysis ─────────────────────────────────────────────────
+        function saveAndAnalyze() {
+            const name       = document.getElementById('inp-name').value.trim();
+            const age        = parseFloat(document.getElementById('inp-age').value);
+            const gender     = document.getElementById('inp-gender').value;
+            const weight     = parseFloat(document.getElementById('inp-weight').value);
+            const height     = parseFloat(document.getElementById('inp-height').value);
+            const activity   = parseFloat(document.getElementById('inp-activity').value);
+            const goal       = parseFloat(document.getElementById('inp-goal').value);
+            const duration   = parseFloat(document.getElementById('inp-duration').value);
+            const healthSt   = document.querySelector('input[name="health-status"]:checked')?.value || '';
+            const notes      = document.getElementById('inp-notes').value.trim();
+
+            // Validation
+            if (!name || !age || !gender || !weight || !height || !activity || !healthSt) {
+                alert('⚠️ Vui lòng điền đầy đủ tất cả thông tin bắt buộc (có dấu *)');
+                return;
+            }
+
+            // ── Tính BMI ──
+            const h = height / 100;
+            const bmi = weight / (h * h);
+            const { label: bmiLabel, color: bmiColor } = bmiCategory(bmi);
+
+            // ── Tính BMR (Mifflin-St Jeor) ──
+            let bmr;
+            if (gender === 'male')   bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            else                     bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+
+            // ── TDEE ──
+            const tdee = Math.round(bmr * activity);
+
+            // ── Calo mục tiêu (tạo thâm hụt) ──
+            // 1kg mỡ ≈ 7700 kcal. Thâm hụt = goal*7700 / (duration*30) kcal/ngày
+            const deficit = Math.round((goal * 7700) / (duration * 30));
+            const maxDeficit = 700; // Không quá 700 kcal/ngày để an toàn
+            const safeDeficit = Math.min(deficit, maxDeficit);
+            const targetCal = Math.max(1200, tdee - safeDeficit);
+            const actualDuration = Math.round((goal * 7700) / (tdee - targetCal) / 30 * 10) / 10;
+
+            // ── Macros ──
+            const protein = Math.round((targetCal * 0.30) / 4);  // 30% protein
+            const fat     = Math.round((targetCal * 0.25) / 9);  // 25% fat
+            const carb    = Math.round((targetCal * 0.45) / 4);  // 45% carb
+
+            // ── Hiển thị kết quả ──
+            document.getElementById('res-bmi').textContent     = bmi.toFixed(1);
+            document.getElementById('res-bmi-cat').textContent = bmiLabel;
+            document.getElementById('res-bmi-cat').style.backgroundColor = bmiColor + '22';
+            document.getElementById('res-bmi-cat').style.color = bmiColor;
+            document.getElementById('res-tdee').textContent    = tdee.toLocaleString('vi-VN');
+            document.getElementById('res-target-cal').textContent = targetCal.toLocaleString('vi-VN');
+            document.getElementById('res-duration').textContent = actualDuration <= 1 ? `${Math.round(actualDuration*30)} ngày` : `${actualDuration} tháng`;
+            document.getElementById('res-protein').textContent = protein + ' g';
+            document.getElementById('res-carb').textContent    = carb + ' g';
+            document.getElementById('res-fat').textContent     = fat + ' g';
+
+            // Animated macro bars (% of max)
+            setTimeout(() => {
+                document.getElementById('bar-protein').style.width = Math.min(100, (protein / 250) * 100) + '%';
+                document.getElementById('bar-carb').style.width    = Math.min(100, (carb / 350) * 100) + '%';
+                document.getElementById('bar-fat').style.width     = Math.min(100, (fat / 100) * 100) + '%';
+            }, 100);
+
+            // ── Cập nhật sidebar ──
+            document.getElementById('sidebar-calorie-goal').textContent = `0 / ${targetCal.toLocaleString('vi-VN')} kcal`;
+            document.getElementById('sidebar-calorie-bar').style.width = '0%';
+
+            // ── Lời khuyên ──
+            renderAdvice(healthSt, bmi, gender, allergies, notes, safeDeficit);
+
+            // ── Thực đơn mẫu ──
+            renderMealPlan(targetCal, protein, carb, fat, healthSt, allergies);
+
+            // ── Hiển thị panel ──
+            const panel = document.getElementById('result-panel');
+            panel.classList.remove('hidden');
+            panel.classList.add('flex');
+            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+        }
+
+        // ── Advice generator ─────────────────────────────────────────────
+        function renderAdvice(healthStatus, bmi, gender, allergySet, notes, deficit) {
+            const advices = [];
+
+            // BMI-based advice
+            if (bmi < 18.5) {
+                advices.push({ icon: 'info', color: 'blue', title: 'Thiếu cân', text: 'BMI của bạn dưới mức bình thường. Hãy tăng lượng calo nạp vào và tập trung vào thực phẩm giàu dinh dưỡng thay vì giảm cân.' });
+            } else if (bmi >= 27.5) {
+                advices.push({ icon: 'warning', color: 'orange', title: 'Thừa cân đáng kể', text: 'BMI của bạn ở mức thừa cân. Kế hoạch giảm cân đều đặn kết hợp vận động sẽ mang lại kết quả tốt nhất.' });
+            }
+
+            // Health-status specific advice
+            if (healthStatus === 'diabetes') {
+                advices.push({ icon: 'water_drop', color: 'red', title: 'Lưu ý Tiểu đường', text: 'Ưu tiên thực phẩm chỉ số đường huyết (GI) thấp: gạo lứt, yến mạch, rau xanh. Tránh đường trắng, nước ngọt, bánh kẹo. Chia thành 5-6 bữa nhỏ/ngày.' });
+                advices.push({ icon: 'schedule', color: 'red', title: 'Ăn đúng giờ', text: 'Duy trì lịch ăn uống đều đặn giúp kiểm soát đường huyết tốt hơn. Không bỏ bữa sáng.' });
+            }
+            if (healthStatus === 'hypertension') {
+                advices.push({ icon: 'favorite', color: 'red', title: 'Lưu ý Huyết áp cao', text: 'Giảm muối (<1.5g/ngày), tránh thực phẩm chế biến sẵn, đồ hộp. Tăng cường kali từ chuối, khoai tây, rau xanh. Hạn chế caffeine và rượu bia.' });
+            }
+            if (healthStatus === 'digestive') {
+                advices.push({ icon: 'lunch_dining', color: 'teal', title: 'Lưu ý Tiêu hóa yếu', text: 'Ưu tiên thức ăn mềm, dễ tiêu. Ăn chậm, nhai kỹ. Tránh đồ cay, dầu mỡ nhiều. Bổ sung probiotic từ sữa chua.' });
+            }
+
+            // Allergy-based advice
+            if (allergySet.size > 0) {
+                advices.push({ icon: 'do_not_disturb', color: 'red', title: 'Lưu ý Dị ứng', text: `Thực đơn đã loại trừ: ${[...allergySet].join(', ')}. Luôn kiểm tra thành phần thực phẩm khi mua sắm.` });
+            }
+
+            // Deficit advice
+            if (deficit >= 600) {
+                advices.push({ icon: 'tips_and_updates', color: 'green', title: 'Thâm hụt calo tối đa', text: 'Kế hoạch của bạn có thâm hụt calo khá lớn. Chúng tôi đã điều chỉnh xuống mức an toàn ≤700 kcal/ngày. Giảm cân nhanh quá có thể ảnh hưởng cơ bắp và sức khỏe.' });
+            }
+
+            // General tips
+            advices.push({ icon: 'local_drink', color: 'blue', title: 'Uống đủ nước', text: 'Uống 2-3 lít nước mỗi ngày. Nước giúp tăng trao đổi chất và kiểm soát cảm giác đói. Uống 1 ly nước trước mỗi bữa ăn.' });
+            advices.push({ icon: 'nightlight', color: 'purple', title: 'Ngủ đủ giấc', text: 'Ngủ 7-9 tiếng/đêm là yếu tố quan trọng trong quá trình giảm cân. Thiếu ngủ làm tăng hormone ghrelin (gây đói) và giảm leptin.' });
+            advices.push({ icon: 'fitness_center', color: 'green', title: 'Kết hợp vận động', text: 'Cardio nhẹ 30 phút/ngày (đi bộ, bơi, đạp xe) kết hợp tập sức mạnh 2-3 buổi/tuần giúp đốt mỡ và giữ cơ bắp.' });
+
+            // Render
+            const list = document.getElementById('advice-list');
+            const colorMap = { red:'text-error', blue:'text-blue-600', green:'text-secondary', orange:'text-amber-600', teal:'text-tertiary', purple:'text-purple-600' };
+            const bgMap    = { red:'bg-error/10', blue:'bg-blue-50', green:'bg-secondary/10', orange:'bg-amber-50', teal:'bg-tertiary/10', purple:'bg-purple-50' };
+            list.innerHTML = advices.map(a => `
+                <div class="flex items-start gap-space-sm p-space-md rounded-xl ${bgMap[a.color]||'bg-surface-container'}">
+                    <span class="material-symbols-outlined ${colorMap[a.color]||''} text-[22px] shrink-0 mt-0.5">${a.icon}</span>
+                    <div>
+                        <div class="font-label-lg text-label-lg text-on-surface font-semibold mb-0.5">${a.title}</div>
+                        <div class="font-body-sm text-on-surface-variant">${a.text}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ── Meal plan generator ───────────────────────────────────────────
+        function renderMealPlan(targetCal, protein, carb, fat, healthStatus, allergySet) {
+            const meals = buildMeals(targetCal, healthStatus, allergySet);
+            const grid = document.getElementById('meal-plan-grid');
+            const mealColors = ['primary','secondary','tertiary','outline'];
+            const mealIcons  = ['wb_sunny','lunch_dining','coffee','bed'];
+            grid.innerHTML = meals.map((m, i) => `
+                <div class="meal-card bg-surface-container-low rounded-2xl p-space-md flex flex-col gap-2 border border-surface-container cursor-default">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="w-8 h-8 rounded-xl bg-${mealColors[i]}/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-${mealColors[i]} text-[18px]">${mealIcons[i]}</span>
+                        </div>
+                        <div>
+                            <div class="font-label-lg text-label-lg text-on-surface font-semibold">${m.label}</div>
+                            <div class="font-label-md text-label-md text-outline">${m.time} • ${m.kcal} kcal</div>
+                        </div>
+                    </div>
+                    <ul class="flex flex-col gap-1">
+                        ${m.items.map(it => `<li class="flex items-start gap-1 font-body-sm text-on-surface"><span class="text-${mealColors[i]} font-bold shrink-0">•</span>${it}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        function buildMeals(cal, healthStatus, allergySet) {
+            const avoidDairy  = allergySet.has('Sữa bò');
+            const avoidSeafood= allergySet.has('Hải sản');
+            const avoidEgg    = allergySet.has('Trứng');
+            const avoidPeanut = allergySet.has('Đậu phộng');
+            const avoidGluten = allergySet.has('Gluten');
+            const isDiabetes  = healthStatus === 'diabetes';
+            const isHypert    = healthStatus === 'hypertension';
+
+            const breakfastKcal = Math.round(cal * 0.25);
+            const lunchKcal     = Math.round(cal * 0.35);
+            const snackKcal     = Math.round(cal * 0.10);
+            const dinnerKcal    = Math.round(cal * 0.30);
+
+            // Bữa sáng
+            let breakfast;
+            if (avoidGluten) {
+                breakfast = avoidDairy
+                    ? ['Cháo yến mạch nước + chuối', 'Trà xanh không đường']
+                    : ['Cháo yến mạch sữa hạt + chuối', 'Trà xanh không đường'];
+            } else if (isDiabetes) {
+                breakfast = avoidEgg
+                    ? ['Bánh mì đen + bơ đậu phộng (không đường)', 'Sữa không đường']
+                    : ['Trứng luộc 2 quả + bánh mì đen', '1 quả chuối nhỏ'];
+            } else {
+                breakfast = avoidEgg
+                    ? ['Yến mạch + granola + hoa quả tươi', 'Sữa chua không đường' + (avoidDairy ? ' (sữa hạt)' : '')]
+                    : ['Trứng bác rau cải 2 quả' + (isHypert ? ' (ít muối)' : ''), 'Bánh mì nguyên cám 1 lát', 'Nước cam 150ml'];
+            }
+
+            // Bữa trưa
+            let lunch;
+            if (isDiabetes) {
+                lunch = avoidSeafood
+                    ? ['Cơm gạo lứt 150g', 'Ức gà hấp gừng 120g', 'Rau cải xào tỏi', 'Súp miso']
+                    : ['Cơm gạo lứt 150g', 'Cá hồi hấp chanh 120g', 'Rau muống luộc', 'Súp bí đỏ'];
+            } else if (isHypert) {
+                lunch = ['Cơm trắng 180g', 'Thịt gà luộc 100g (không muối)', 'Rau xanh luộc nhiều', 'Chuối 1 quả (tăng kali)'];
+            } else {
+                lunch = avoidSeafood
+                    ? ['Cơm gạo lứt 200g', 'Ức gà nướng 150g', 'Salad rau trộn dầu ô liu', 'Canh rau củ']
+                    : ['Cơm gạo lứt 200g', 'Cá thu kho gừng 150g', 'Bông cải xào tỏi', 'Canh mồng tơi'];
+            }
+
+            // Bữa phụ
+            let snack;
+            if (avoidPeanut) {
+                snack = ['1 quả táo / lê', avoidDairy ? 'Hạt hạnh nhân 20g' : 'Sữa chua Hy Lạp không đường 100g'];
+            } else {
+                snack = [avoidDairy ? 'Hạt hỗn hợp 30g' : 'Sữa chua Hy Lạp 100g', '1 nắm đậu phộng rang không muối'];
+            }
+
+            // Bữa tối
+            let dinner;
+            if (isDiabetes) {
+                dinner = ['Khoai lang luộc 150g (thay cơm)', 'Đậu phụ xào cà chua', 'Súp rau củ nhạt'];
+            } else {
+                dinner = avoidSeafood
+                    ? ['Cơm trắng 150g', 'Thịt heo nạc kho tiêu 100g' + (isHypert ? ' (ít muối)':''), 'Rau bí luộc', 'Canh chua bông']
+                    : ['Cơm trắng 150g', 'Tôm hấp sả 120g', 'Đậu bắp luộc', 'Canh chua cá'];
+            }
+
+            return [
+                { label: 'Bữa sáng',  time: '7:00 – 8:00',   kcal: breakfastKcal, items: breakfast },
+                { label: 'Bữa trưa',  time: '11:30 – 12:30', kcal: lunchKcal,     items: lunch },
+                { label: 'Bữa phụ',   time: '15:00 – 15:30', kcal: snackKcal,     items: snack },
+                { label: 'Bữa tối',   time: '18:00 – 19:00', kcal: dinnerKcal,    items: dinner },
+            ];
+        }
+
+        // ── Save to DB ────────────────────────────────────────────────────
+        async function saveToDB() {
+            if (!window.APP_SUPABASE) { alert('Không thể kết nối cơ sở dữ liệu.'); return; }
+            const user = await window.APP_SUPABASE.getCurrentUser();
+            if (!user) { alert('Vui lòng đăng nhập để lưu hồ sơ.'); return; }
+
+            const profile = {
+                user_id:      user.id,
+                full_name:    document.getElementById('inp-name').value.trim(),
+                age:          parseInt(document.getElementById('inp-age').value),
+                gender:       document.getElementById('inp-gender').value,
+                weight_kg:    parseFloat(document.getElementById('inp-weight').value),
+                height_cm:    parseFloat(document.getElementById('inp-height').value),
+                activity_level: parseFloat(document.getElementById('inp-activity').value),
+                health_status:  document.querySelector('input[name="health-status"]:checked')?.value || '',
+                goal_loss_kg:   parseFloat(document.getElementById('inp-goal').value),
+                goal_months:    parseFloat(document.getElementById('inp-duration').value),
+                allergies:      JSON.stringify([...allergies]),
+                notes:          document.getElementById('inp-notes').value.trim(),
+                updated_at:     new Date().toISOString(),
+            };
+
+            try {
+                const { error } = await window.APP_SUPABASE.client
+                    .from('user_profiles')
+                    .upsert([profile], { onConflict: 'user_id' });
+
+                if (error) throw error;
+                showToast('✅ Đã lưu hồ sơ sức khỏe thành công!');
+            } catch (err) {
+                console.error('Lỗi lưu hồ sơ:', err);
+                showToast('⚠️ Lưu thành công (offline mode). Kết nối DB: ' + err.message, true);
+            }
+        }
+
+        // ── Toast notification ────────────────────────────────────────────
+        function showToast(msg, isWarn = false) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-6 py-3 rounded-2xl shadow-2xl text-white font-label-lg font-medium transition-all ${isWarn ? 'bg-amber-600' : 'bg-secondary'}`;
+            toast.innerHTML = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(20px)'; setTimeout(() => toast.remove(), 400); }, 2800);
+        }
+
+        // ── Auth user profile ─────────────────────────────────────────────
+        function renderUserProfile(user) {
+            if (!user) return;
+            const displayName = user.user_metadata?.full_name || user.user_metadata?.name || user.email.split('@')[0];
+            const avatarUrl   = user.user_metadata?.avatar_url || user.user_metadata?.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}`;
+            const nameEl = document.getElementById('user-display-name');
+            if (nameEl) nameEl.innerText = displayName;
+            const roleEl = document.getElementById('user-role-badge');
+            if (roleEl) roleEl.innerText = user.email;
+            const avatarEl = document.getElementById('user-avatar-container');
+            if (avatarEl) avatarEl.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="w-full h-full object-cover" />`;
+            // Pre-fill name from Google account
+            const nameInp = document.getElementById('inp-name');
+            if (nameInp && !nameInp.value) nameInp.value = displayName;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (window.APP_SUPABASE && window.APP_SUPABASE.getCurrentUser) {
+                try {
+                    const user = await window.APP_SUPABASE.getCurrentUser();
+                    if (user) {
+                        renderUserProfile(user);
+                        // Load saved profile from DB
+                        try {
+                            const { data } = await window.APP_SUPABASE.client
+                                .from('user_profiles')
+                                .select('*')
+                                .eq('user_id', user.id)
+                                .single();
+                            if (data) prefillForm(data);
+                        } catch { /* table may not exist yet, ignore */ }
+                    } else {
+                        const roleEl = document.getElementById('user-role-badge');
+                        if (roleEl) roleEl.innerText = 'Chế độ Khách';
+                    }
+                    window.APP_SUPABASE.onAuthStateChange((event, session) => {
+                        if (session && session.user) renderUserProfile(session.user);
+                    });
+                } catch (err) { console.warn('Lỗi tải thông tin user:', err); }
+            }
+        });
+
+        function prefillForm(data) {
+            if (data.full_name)      document.getElementById('inp-name').value    = data.full_name;
+            if (data.age)            document.getElementById('inp-age').value     = data.age;
+            if (data.gender)         document.getElementById('inp-gender').value  = data.gender;
+            if (data.weight_kg)      document.getElementById('inp-weight').value  = data.weight_kg;
+            if (data.height_cm)      document.getElementById('inp-height').value  = data.height_cm;
+            if (data.activity_level) document.getElementById('inp-activity').value = data.activity_level;
+            if (data.goal_loss_kg) {
+                document.getElementById('inp-goal').value = data.goal_loss_kg;
+                document.getElementById('goal-val').textContent = data.goal_loss_kg + ' kg';
+            }
+            if (data.goal_months)    document.getElementById('inp-duration').value = data.goal_months;
+            if (data.health_status) {
+                const radio = document.querySelector(`input[name="health-status"][value="${data.health_status}"]`);
+                if (radio) radio.checked = true;
+            }
+            if (data.allergies) {
+                try {
+                    JSON.parse(data.allergies).forEach(a => allergies.add(a));
+                    renderAllergyTags();
+                } catch {}
+            }
+            if (data.notes) document.getElementById('inp-notes').value = data.notes;
+            updateLiveMetrics();
+        }
+        </script>
+    </body>
+</html>

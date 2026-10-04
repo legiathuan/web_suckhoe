@@ -87,11 +87,24 @@ async function signInWithGoogle() {
  * Đăng xuất
  */
 async function signOutUser() {
-    if (!supabaseClient) throw new Error("Supabase client chưa sẵn sàng");
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-    window.location.href = "login.html";
+    try {
+        if (supabaseClient) {
+            await supabaseClient.auth.signOut();
+        }
+    } catch (err) {
+        console.warn("Lỗi đăng xuất Supabase:", err);
+    } finally {
+        // Luôn chuyển hướng về trang đăng nhập
+        window.location.href = "login.html";
+    }
 }
+
+// Hàm đăng xuất tiện ích có hộp thoại xác nhận dùng chung trên toàn bộ giao diện
+window.handleLogout = async function() {
+    if (confirm("Bạn có chắc chắn muốn đăng xuất tài khoản?")) {
+        await signOutUser();
+    }
+};
 
 /**
  * Lấy thông tin người dùng hiện tại đang đăng nhập
