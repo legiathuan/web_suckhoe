@@ -1,5 +1,4 @@
-<!doctype html>
-
+\<!doctype html>
 <html lang="vi">
     <head>
         <meta charset="utf-8" />
@@ -16,9 +15,27 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./quan_tri_thuc_.css" />
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="./supabaseClient.js"></script>
+        <style>
+            @layer base {
+                html,
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+                body {
+                    overscroll-behavior: none;
+                }
+                main > :first-child {
+                    margin-top: 0 !important;
+                }
+                main > :last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <script id="tailwind-config">
             tailwind.config = {
@@ -150,9 +167,9 @@
             <div class="flex flex-col">
                 <div class="h-16 px-space-lg flex items-center gap-space-sm">
                     <img
-                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
-                        class="h-8 w-auto object-contain"
-                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                        alt="Green Health Logo"
+                        class="w-10 h-10 object-contain flex-shrink-0"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1UyUS8nNZwkdtVupP-xXuH6zFobVxlHCSn3obuea1pKBuO6yIBN3lCdmo9TZUeqh-tEnokPjdrkUt7KCqNT6mShxKp_E0r0OiSMpZ1PMbOjejTlbSm1QI6otq2OOZ84rVdBwv_PefmG_G0F57Fz-OleOITZFIs9IAeN34PaIZs5dB33uBIe3h3dH2kARcc7DXtDb6HFHuN6dw8vBJmEclG74LtVfgSLn0qIZL0cbzTRiWUlKg2J_avcWpyX"
                     />
                     <div class="flex flex-col">
                         <span
@@ -176,28 +193,28 @@
                         <a
                             class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="overview"
-                            href="tong_quan_skhoe.html"
+                            href="./tong_quan_skhoe.html"
                             >Tổng quan Sức khỏe</a
                         ><a
                             class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="food-log"
-                            href="nhat_ky.html"
+                            href="./quan_tri_thuc_pham.html"
                             >Nhật ký &amp; AI Food Log</a
                         ><a
                             class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="meal-plan"
-                            href="thucdon.html"
+                            href="./meal_plan.html"
                             >Thực đơn &amp; Kế hoạch</a
                         ><a
                             class="px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="expert"
-                            href="tu_van_chuyen_gia.html"
+                            href="./tu_van_chuyen_gia.html"
                             >Tư vấn Chuyên gia</a
                         ><a
                             aria-current="page"
                             class="px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl"
                             data-path="food-admin"
-                            href="quan_tri_thuc_pham.html"
+                            href="./quan_tri_thuc_pham.html"
                             >Quản trị Thực phẩm</a
                         >
                     </nav>
@@ -240,7 +257,7 @@
                     >
                         <span class="material-symbols-outlined text-base"
                             >vital_signs</span
-                        ><span>TDEE: 2,150 kcal • BMI: 21.8</span>
+                        ><span class="">TDEE: 2,150 kcal • BMI: 21.8</span>
                     </div>
                     <button
                         class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center"
@@ -251,10 +268,9 @@
                             class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
                         ></span>
                     </button>
-                    <div class="flex items-center gap-space-sm pl-space-sm" id="user-profile-header">
+                    <div class="flex items-center gap-space-sm pl-space-sm">
                         <div
-                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden"
-                            id="user-avatar-container"
+                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
                         >
                             <span
                                 class="material-symbols-outlined text-on-primary text-[18px]"
@@ -264,21 +280,12 @@
                         <div class="hidden sm:flex flex-col">
                             <span
                                 class="font-label-lg text-label-lg text-on-surface leading-tight"
-                                id="user-display-name"
                                 >Nguyễn Minh Anh</span
                             ><span
                                 class="font-label-md text-label-md text-on-surface-variant leading-tight"
-                                id="user-role-badge"
-                                >Quản trị viên</span
+                                >Gói Chăm sóc Premium</span
                             >
                         </div>
-                        <button
-                            onclick="window.APP_SUPABASE.signOutUser()"
-                            class="ml-2 p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/30 transition-colors"
-                            title="Đăng xuất"
-                        >
-                            <span class="material-symbols-outlined text-[20px]">logout</span>
-                        </button>
                     </div>
                 </div>
             </header>
@@ -325,7 +332,7 @@
                                     class="material-symbols-outlined text-[20px] text-outline"
                                     >file_upload</span
                                 >
-                                <span>Nhập Excel/CSV</span>
+                                <span class="">Nhập Excel/CSV</span>
                             </button>
                             <button
                                 class="px-space-md py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-lg text-label-lg shadow-sm hover:bg-surface-container-high transition-all flex items-center gap-space-xs"
@@ -334,17 +341,16 @@
                                     class="material-symbols-outlined text-[20px] text-outline"
                                     >file_download</span
                                 >
-                                <span>Xuất dữ liệu</span>
+                                <span class="">Xuất dữ liệu</span>
                             </button>
                             <button
                                 class="px-space-lg py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-sm hover:bg-primary-container transition-all flex items-center gap-space-xs"
-                                onclick="openAddFoodModal()"
                             >
                                 <span
                                     class="material-symbols-outlined text-[20px]"
                                     >add</span
                                 >
-                                <span>Thêm món ăn mới</span>
+                                <span class="">Thêm món ăn mới</span>
                             </button>
                         </div>
                     </div>
@@ -383,7 +389,9 @@
                                         class="material-symbols-outlined text-[16px]"
                                         >arrow_upward</span
                                     >
-                                    <span>+124 món mới trong tuần</span>
+                                    <span class=""
+                                        >+124 món mới trong tuần</span
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -417,7 +425,7 @@
                                     <span class="text-primary font-semibold"
                                         >18.5%</span
                                     >
-                                    <span>tổng cơ sở dữ liệu</span>
+                                    <span class="">tổng cơ sở dữ liệu</span>
                                 </div>
                             </div>
                         </div>
@@ -452,7 +460,7 @@
                                         class="material-symbols-outlined text-[16px]"
                                         >verified</span
                                     >
-                                    <span>Tự động gán nhãn AI</span>
+                                    <span class="">Tự động gán nhãn AI</span>
                                 </div>
                             </div>
                         </div>
@@ -492,7 +500,9 @@
                                     <span class="text-error font-medium"
                                         >3 món</span
                                     >
-                                    <span>cần bổ sung vi chất kẽm/sắt</span>
+                                    <span class=""
+                                        >cần bổ sung vi chất kẽm/sắt</span
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -588,7 +598,7 @@
                                         class="material-symbols-outlined text-[18px]"
                                         >tune</span
                                     >
-                                    <span>Bộ lọc sâu</span>
+                                    <span class="">Bộ lọc sâu</span>
                                 </button>
                             </div>
                         </div>
@@ -603,7 +613,7 @@
                             <button
                                 class="px-3 py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-sm"
                             >
-                                <span>Tất cả</span>
+                                <span class="">Tất cả</span>
                                 <span
                                     class="text-[10px] opacity-75 font-semibold"
                                     >45,120</span
@@ -612,27 +622,29 @@
                             <button
                                 class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1"
                             >
-                                <span>High Protein (&gt;20g)</span>
+                                <span class="">High Protein (&gt;20g)</span>
                             </button>
                             <button
                                 class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1"
                             >
-                                <span>Keto Friendly (&lt;5g Carb)</span>
+                                <span class=""
+                                    >Keto Friendly (&lt;5g Carb)</span
+                                >
                             </button>
                             <button
                                 class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1"
                             >
-                                <span>Chỉ số GI thấp (&lt;55)</span>
+                                <span class="">Chỉ số GI thấp (&lt;55)</span>
                             </button>
                             <button
                                 class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1"
                             >
-                                <span>Không Gluten / Đậu phộng</span>
+                                <span class="">Không Gluten / Đậu phộng</span>
                             </button>
                             <button
                                 class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1"
                             >
-                                <span>Nguồn VN Dinh Dưỡng QG</span>
+                                <span class="">Nguồn VN Dinh Dưỡng QG</span>
                             </button>
                         </div>
                     </div>
@@ -647,8 +659,8 @@
                             >
                             <span
                                 class="font-label-lg text-label-lg font-semibold"
-                                ><span id="selected-count">2</span> mục đã được
-                                chọn</span
+                                ><span id="selected-count" class="">2</span> mục
+                                đã được chọn</span
                             >
                         </div>
                         <div class="flex items-center gap-space-sm">
@@ -737,7 +749,6 @@
                                 </thead>
                                 <!-- Table Body -->
                                 <tbody
-                                    id="food-table-body"
                                     class="divide-y divide-surface-container font-body-sm text-body-sm text-on-surface"
                                 >
                                     <!-- Row 1: Ức gà phi lê hấp -->
@@ -851,7 +862,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 0</span>
+                                                <span class="">GI: 0</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Rất thấp)</span
@@ -871,7 +882,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >verified</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >Viện Dinh Dưỡng
                                                         QG</span
                                                     >
@@ -885,7 +896,9 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-secondary"
                                                 ></span>
-                                                <span>Đã kiểm duyệt</span>
+                                                <span class=""
+                                                    >Đã kiểm duyệt</span
+                                                >
                                             </span>
                                         </td>
                                         <td class="py-4 px-space-md text-right">
@@ -1047,7 +1060,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 52</span>
+                                                <span class="">GI: 52</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Thấp)</span
@@ -1067,7 +1080,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >verified</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >USDA FoodData Lab</span
                                                     >
                                                 </span>
@@ -1080,7 +1093,9 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-secondary"
                                                 ></span>
-                                                <span>Đã kiểm duyệt</span>
+                                                <span class=""
+                                                    >Đã kiểm duyệt</span
+                                                >
                                             </span>
                                         </td>
                                         <td class="py-4 px-space-md text-right">
@@ -1243,7 +1258,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 0</span>
+                                                <span class="">GI: 0</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Rất thấp)</span
@@ -1263,7 +1278,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >verified</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >Tiêu chuẩn ASC /
                                                         FDA</span
                                                     >
@@ -1277,7 +1292,9 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-secondary"
                                                 ></span>
-                                                <span>Đã kiểm duyệt</span>
+                                                <span class=""
+                                                    >Đã kiểm duyệt</span
+                                                >
                                             </span>
                                         </td>
                                         <td class="py-4 px-space-md text-right">
@@ -1438,7 +1455,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 12</span>
+                                                <span class="">GI: 12</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Rất thấp)</span
@@ -1458,7 +1475,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >verified</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >Viện Dinh Dưỡng
                                                         QG</span
                                                     >
@@ -1472,7 +1489,9 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-secondary"
                                                 ></span>
-                                                <span>Đã kiểm duyệt</span>
+                                                <span class=""
+                                                    >Đã kiểm duyệt</span
+                                                >
                                             </span>
                                         </td>
                                         <td class="py-4 px-space-md text-right">
@@ -1634,7 +1653,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 15</span>
+                                                <span class="">GI: 15</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Thấp)</span
@@ -1655,7 +1674,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >schedule</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >Đối tác Farm cung
                                                         cấp</span
                                                     >
@@ -1669,7 +1688,7 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-error"
                                                 ></span>
-                                                <span
+                                                <span class=""
                                                     >Chờ chuyên gia duyệt</span
                                                 >
                                             </span>
@@ -1814,7 +1833,7 @@
                                             <div
                                                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold"
                                             >
-                                                <span>GI: 48</span>
+                                                <span class="">GI: 48</span>
                                                 <span
                                                     class="font-normal text-[11px]"
                                                     >(Thấp)</span
@@ -1834,7 +1853,7 @@
                                                         class="material-symbols-outlined text-[14px]"
                                                         >verified</span
                                                     >
-                                                    <span
+                                                    <span class=""
                                                         >Viện Dinh Dưỡng
                                                         QG</span
                                                     >
@@ -1848,7 +1867,9 @@
                                                 <span
                                                     class="w-1.5 h-1.5 rounded-full bg-secondary"
                                                 ></span>
-                                                <span>Đã kiểm duyệt</span>
+                                                <span class=""
+                                                    >Đã kiểm duyệt</span
+                                                >
                                             </span>
                                         </td>
                                         <td class="py-4 px-space-md text-right">
@@ -2118,310 +2139,108 @@
                                         class="material-symbols-outlined text-[18px]"
                                         >edit_note</span
                                     >
-                                    <span>Hiệu chỉnh Vi chất</span>
+                                    <span class="">Hiệu chỉnh Vi chất</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Modal Thêm món ăn mới -->
-                    <div id="add-food-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden p-4">
-                        <div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full shadow-2xl border border-outline-variant/30 overflow-hidden">
-                            <div class="p-6 border-b border-surface-container flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-primary text-[24px]">restaurant_menu</span>
-                                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Thêm món ăn vào hệ thống</h3>
-                                </div>
-                                <button onclick="closeAddFoodModal()" class="text-outline hover:text-on-surface p-1 rounded-lg">
-                                    <span class="material-symbols-outlined text-[20px]">close</span>
-                                </button>
-                            </div>
-                            <form id="add-food-form" onsubmit="saveNewFood(event)" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
-                                <div>
-                                    <label class="block font-label-md text-on-surface mb-1">Tên thực phẩm / Món ăn *</label>
-                                    <input id="new-food-name" required placeholder="Ví dụ: Cá hồi sốt chanh leo" class="w-full px-3 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm" />
-                                </div>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Danh mục</label>
-                                        <select id="new-food-category" class="w-full px-3 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm">
-                                            <option value="Thịt & Gia cầm">Thịt & Gia cầm</option>
-                                            <option value="Hải sản">Hải sản</option>
-                                            <option value="Trái cây & Rau củ">Trái cây & Rau củ</option>
-                                            <option value="Ngũ cốc & Hạt">Ngũ cốc & Hạt</option>
-                                            <option value="Món ăn truyền thống">Món ăn truyền thống</option>
-                                            <option value="Trứng & Sữa">Trứng & Sữa</option>
-                                            <option value="Khác">Khác</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Khẩu phần *</label>
-                                        <input id="new-food-serving" required placeholder="100g, 1 bát, 1 tô..." class="w-full px-3 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm" />
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-4 gap-2">
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Calo (kcal) *</label>
-                                        <input id="new-food-calories" type="number" step="0.1" required placeholder="165" class="w-full px-2 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm text-center" />
-                                    </div>
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Protein (g)</label>
-                                        <input id="new-food-protein" type="number" step="0.1" placeholder="31" class="w-full px-2 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm text-center" />
-                                    </div>
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Carbs (g)</label>
-                                        <input id="new-food-carbs" type="number" step="0.1" placeholder="0" class="w-full px-2 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm text-center" />
-                                    </div>
-                                    <div>
-                                        <label class="block font-label-md text-on-surface mb-1">Fat (g)</label>
-                                        <input id="new-food-fat" type="number" step="0.1" placeholder="3.6" class="w-full px-2 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm text-center" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block font-label-md text-on-surface mb-1">Vi chất dinh dưỡng (tùy chọn)</label>
-                                    <input id="new-food-micros" placeholder="VD: 54mg Magiê, 1.9mg Sắt, Vitamin C..." class="w-full px-3 py-2 bg-surface-container-low rounded-lg text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm" />
-                                </div>
-                                <div id="add-food-error" class="hidden text-error font-body-sm text-sm p-2 bg-error-container/30 rounded-lg"></div>
-                                <div class="pt-3 flex justify-end gap-3 border-t border-surface-container">
-                                    <button type="button" onclick="closeAddFoodModal()" class="px-4 py-2 rounded-lg bg-surface-container-highest text-on-surface font-label-md hover:bg-surface-variant transition-colors">Hủy</button>
-                                    <button id="save-food-btn" type="submit" class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md hover:bg-primary/90 transition-colors flex items-center gap-1 shadow-sm">
-                                        <span class="material-symbols-outlined text-[18px]">save</span>
-                                        Lưu vào Supabase
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Inline Script for UI Interactivity & Supabase Data Connection -->
+                    <!-- Inline Script for UI Interactivity -->
                     <script>
                         const checkAll = document.getElementById("check-all");
-                        const rowCheckboxes = document.querySelectorAll(".row-checkbox");
+                        const rowCheckboxes =
+                            document.querySelectorAll(".row-checkbox");
                         const bulkBar = document.getElementById("bulk-bar");
-                        const selectedCountSpan = document.getElementById("selected-count");
+                        const selectedCountSpan =
+                            document.getElementById("selected-count");
 
                         function updateBulkState() {
-                            const checkedBoxes = document.querySelectorAll(".row-checkbox:checked");
+                            const checkedBoxes = document.querySelectorAll(
+                                ".row-checkbox:checked",
+                            );
                             const count = checkedBoxes.length;
                             if (count > 0) {
-                                if (bulkBar) bulkBar.classList.remove("hidden");
-                                if (selectedCountSpan) selectedCountSpan.textContent = count;
+                                bulkBar.classList.remove("hidden");
+                                selectedCountSpan.textContent = count;
                             } else {
-                                if (bulkBar) bulkBar.classList.add("hidden");
+                                bulkBar.classList.add("hidden");
                             }
                             if (checkAll) {
-                                checkAll.checked = count === rowCheckboxes.length && count > 0;
+                                checkAll.checked =
+                                    count === rowCheckboxes.length && count > 0;
                             }
                         }
 
                         if (checkAll) {
                             checkAll.addEventListener("change", (e) => {
-                                document.querySelectorAll(".row-checkbox").forEach((cb) => {
+                                rowCheckboxes.forEach((cb) => {
                                     cb.checked = e.target.checked;
                                 });
                                 updateBulkState();
                             });
                         }
 
-                        document.querySelectorAll(".row-checkbox").forEach((cb) => {
+                        rowCheckboxes.forEach((cb) => {
                             cb.addEventListener("change", updateBulkState);
                         });
 
                         function clearSelection() {
-                            document.querySelectorAll(".row-checkbox").forEach((cb) => (cb.checked = false));
+                            rowCheckboxes.forEach((cb) => (cb.checked = false));
                             if (checkAll) checkAll.checked = false;
                             updateBulkState();
                         }
 
-                        // Modal helpers for Micro-nutrients
-                        function toggleMicroModal(name, protein, carb, fat, micros) {
-                            document.getElementById("modal-food-name").textContent = name;
-                            document.getElementById("modal-protein").textContent = protein;
-                            document.getElementById("modal-carb").textContent = carb;
-                            document.getElementById("modal-fat").textContent = fat;
-                            document.getElementById("modal-micros").textContent = micros;
-                            document.getElementById("micro-modal").classList.remove("hidden");
+                        // Modal helpers
+                        function toggleMicroModal(
+                            name,
+                            protein,
+                            carb,
+                            fat,
+                            micros,
+                        ) {
+                            document.getElementById(
+                                "modal-food-name",
+                            ).textContent = name;
+                            document.getElementById(
+                                "modal-protein",
+                            ).textContent = protein;
+                            document.getElementById("modal-carb").textContent =
+                                carb;
+                            document.getElementById("modal-fat").textContent =
+                                fat;
+                            document.getElementById(
+                                "modal-micros",
+                            ).textContent = micros;
+                            document
+                                .getElementById("micro-modal")
+                                .classList.remove("hidden");
                         }
 
                         function closeMicroModal() {
-                            document.getElementById("micro-modal").classList.add("hidden");
-                        }
-
-                        // Modal Add Food helpers
-                        function openAddFoodModal() {
-                            document.getElementById("add-food-error").classList.add("hidden");
-                            document.getElementById("add-food-modal").classList.remove("hidden");
-                        }
-
-                        function closeAddFoodModal() {
-                            document.getElementById("add-food-modal").classList.add("hidden");
-                            document.getElementById("add-food-form").reset();
+                            document
+                                .getElementById("micro-modal")
+                                .classList.add("hidden");
                         }
 
                         // Quick client-side instant search simulation
-                        const searchInput = document.getElementById("food-search-input");
+                        const searchInput =
+                            document.getElementById("food-search-input");
                         if (searchInput) {
                             searchInput.addEventListener("input", (e) => {
-                                const query = e.target.value.toLowerCase().trim();
-                                const rows = document.querySelectorAll("#food-table-body tr");
+                                const query = e.target.value
+                                    .toLowerCase()
+                                    .trim();
+                                const rows =
+                                    document.querySelectorAll("tbody tr");
                                 rows.forEach((row) => {
                                     const text = row.textContent.toLowerCase();
-                                    row.style.display = text.includes(query) ? "" : "none";
+                                    if (text.includes(query)) {
+                                        row.style.display = "";
+                                    } else {
+                                        row.style.display = "none";
+                                    }
                                 });
                             });
                         }
-
-                        // ---------------------------------------------------------
-                        // SUPABASE DATA OPERATIONS
-                        // ---------------------------------------------------------
-
-                        async function saveNewFood(e) {
-                            e.preventDefault();
-                            const errorEl = document.getElementById("add-food-error");
-                            const saveBtn = document.getElementById("save-food-btn");
-                            errorEl.classList.add("hidden");
-
-                            const name = document.getElementById("new-food-name").value.trim();
-                            const category = document.getElementById("new-food-category").value;
-                            const serving_size = document.getElementById("new-food-serving").value.trim();
-                            const calories = parseFloat(document.getElementById("new-food-calories").value);
-                            const protein = parseFloat(document.getElementById("new-food-protein").value) || 0;
-                            const carbs = parseFloat(document.getElementById("new-food-carbs").value) || 0;
-                            const fat = parseFloat(document.getElementById("new-food-fat").value) || 0;
-                            const micros = document.getElementById("new-food-micros").value.trim();
-
-                            saveBtn.disabled = true;
-                            saveBtn.innerHTML = `<span class="inline-block animate-spin mr-1">⟳</span> Đang lưu...`;
-
-                            try {
-                                if (window.APP_SUPABASE && window.APP_SUPABASE.addFoodItem) {
-                                    await window.APP_SUPABASE.addFoodItem({
-                                        name,
-                                        category,
-                                        serving_size,
-                                        calories,
-                                        protein,
-                                        carbs,
-                                        fat,
-                                        micros,
-                                        status: "approved"
-                                    });
-                                    closeAddFoodModal();
-                                    await loadFoodsFromSupabase();
-                                    alert("Đã thêm món ăn mới vào CSDL Supabase thành công!");
-                                } else {
-                                    throw new Error("Supabase client chưa sẵn sàng.");
-                                }
-                            } catch (err) {
-                                errorEl.textContent = "Lỗi khi lưu món ăn: " + (err.message || err);
-                                errorEl.classList.remove("hidden");
-                            } finally {
-                                saveBtn.disabled = false;
-                                saveBtn.innerHTML = `<span class="material-symbols-outlined text-[18px]">save</span> Lưu vào Supabase`;
-                            }
-                        }
-
-                        async function deleteFood(id, name) {
-                            if (!confirm(`Bạn có chắc chắn muốn xóa "${name}" khỏi cơ sở dữ liệu?`)) return;
-
-                            try {
-                                if (window.APP_SUPABASE && window.APP_SUPABASE.deleteFoodItem) {
-                                    await window.APP_SUPABASE.deleteFoodItem(id);
-                                    await loadFoodsFromSupabase();
-                                }
-                            } catch (err) {
-                                alert("Không thể xóa món ăn: " + (err.message || err));
-                            }
-                        }
-
-                        async function loadFoodsFromSupabase() {
-                            if (!window.APP_SUPABASE || !window.APP_SUPABASE.getFoodItems) return;
-                            const foods = await window.APP_SUPABASE.getFoodItems();
-                            if (!foods || foods.length === 0) return; // Giữ lại giao diện mẫu nếu bảng trống
-
-                            const tbody = document.getElementById("food-table-body");
-                            if (!tbody) return;
-
-                            tbody.innerHTML = foods.map((food) => {
-                                const microText = food.micros || "Đang cập nhật vi chất";
-                                return `
-                                    <tr class="hover:bg-surface-container-low/50 transition-colors group">
-                                        <td class="py-4 px-space-md text-center">
-                                            <input class="row-checkbox w-4 h-4 accent-primary rounded cursor-pointer" type="checkbox" />
-                                        </td>
-                                        <td class="py-4 px-space-md">
-                                            <div class="flex items-center gap-space-sm">
-                                                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-lg flex-shrink-0">
-                                                    ${food.name.charAt(0)}
-                                                </div>
-                                                <div>
-                                                    <div class="font-headline-sm text-base text-on-surface font-semibold">${food.name}</div>
-                                                    <div class="font-label-md text-label-md text-outline">Định lượng: ${food.serving_size || '100g'}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-space-md">
-                                            <span class="px-2.5 py-1 rounded-full text-label-md font-medium bg-surface-container-high text-on-surface-variant">${food.category || 'Khác'}</span>
-                                        </td>
-                                        <td class="py-4 px-space-md">
-                                            <span class="font-headline-sm text-base font-bold text-primary">${food.calories}</span>
-                                            <span class="font-label-md text-label-md text-outline">kcal</span>
-                                        </td>
-                                        <td class="py-4 px-space-md font-medium">${food.protein}g</td>
-                                        <td class="py-4 px-space-md font-medium">${food.carbs}g</td>
-                                        <td class="py-4 px-space-md font-medium">${food.fat}g</td>
-                                        <td class="py-4 px-space-md">
-                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-md font-medium bg-secondary-container/50 text-on-secondary-container">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                                                <span>${food.status === 'approved' ? 'Đã kiểm duyệt' : 'Chờ duyệt'}</span>
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-space-md text-right">
-                                            <div class="flex items-center justify-end gap-1">
-                                                <button onclick="toggleMicroModal('${food.name}', '${food.protein}g', '${food.carbs}g', '${food.fat}g', '${microText}')" class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Xem vi chất chi tiết">
-                                                    <span class="material-symbols-outlined text-[18px]">science</span>
-                                                </button>
-                                                <button onclick="deleteFood('${food.id}', '${food.name}')" class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors" title="Xóa món">
-                                                    <span class="material-symbols-outlined text-[18px]">delete</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                `;
-                            }).join("");
-
-                            // Gán lại sự kiện checkbox sau khi render
-                            document.querySelectorAll(".row-checkbox").forEach((cb) => {
-                                cb.addEventListener("change", updateBulkState);
-                            });
-                        }
-
-                        // Khởi chạy khi tài liệu tải xong
-                        document.addEventListener("DOMContentLoaded", async () => {
-                            // Cập nhật thông tin tài khoản đăng nhập
-                            if (window.APP_SUPABASE && window.APP_SUPABASE.getCurrentUser) {
-                                try {
-                                    const user = await window.APP_SUPABASE.getCurrentUser();
-                                    if (user) {
-                                        const displayName = user.user_metadata?.full_name || user.email.split("@")[0];
-                                        const avatarUrl = user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}`;
-                                        const nameEl = document.getElementById("user-display-name");
-                                        if (nameEl) nameEl.innerText = displayName;
-                                        const roleEl = document.getElementById("user-role-badge");
-                                        if (roleEl) roleEl.innerText = user.email;
-                                        const avatarEl = document.getElementById("user-avatar-container");
-                                        if (avatarEl) {
-                                            avatarEl.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="w-full h-full object-cover" />`;
-                                        }
-                                    }
-                                } catch (err) {
-                                    console.warn("Lỗi kiểm tra session:", err);
-                                }
-                            }
-
-                            // Tải dữ liệu từ Supabase
-                            await loadFoodsFromSupabase();
-                        });
                     </script>
                 </div>
             </main>

@@ -185,7 +185,10 @@
                         >Admin Panel</a
                     >
                 </nav>
-                <div class="flex items-center gap-space-md" id="auth-actions-header">
+                <div
+                    class="flex items-center gap-space-md"
+                    id="auth-actions-header"
+                >
                     <a
                         class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors text-label-lg"
                         data-path="login"
@@ -257,9 +260,9 @@
                                         >
                                             Trải nghiệm ngay
                                             <span
-                                                 class="material-symbols-outlined text-[18px]"
-                                                 >arrow_forward</span
-                                             >
+                                                class="material-symbols-outlined text-[18px]"
+                                                >arrow_forward</span
+                                            >
                                         </a>
                                         <a
                                             class="px-space-xl py-space-md rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all text-label-lg"
@@ -725,10 +728,16 @@
             document.addEventListener("DOMContentLoaded", async () => {
                 if (window.APP_SUPABASE && window.APP_SUPABASE.getCurrentUser) {
                     const user = await window.APP_SUPABASE.getCurrentUser();
-                    const container = document.getElementById("auth-actions-header");
+                    const container = document.getElementById(
+                        "auth-actions-header",
+                    );
                     if (user && container) {
-                        const name = user.user_metadata?.full_name || user.email.split("@")[0];
-                        const avatar = user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}`;
+                        const name =
+                            user.user_metadata?.full_name ||
+                            user.email.split("@")[0];
+                        const avatar =
+                            user.user_metadata?.avatar_url ||
+                            `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}`;
                         container.innerHTML = `
                             <a href="tong_quan_skhoe.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                 <img src="${avatar}" alt="${name}" class="w-8 h-8 rounded-full border border-primary/20 object-cover" />

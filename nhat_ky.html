@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="vi">
     <head>
         <meta charset="utf-8" />
@@ -16,9 +15,27 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./nhat_ky.css" />
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="./supabaseClient.js"></script>
+        <style>
+            @layer base {
+                html,
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+                body {
+                    overscroll-behavior: none;
+                }
+                main > :first-child {
+                    margin-top: 0 !important;
+                }
+                main > :last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <script id="tailwind-config">
             tailwind.config = {
@@ -150,15 +167,16 @@
             <div class="flex flex-col">
                 <div class="h-16 px-space-lg flex items-center gap-space-sm">
                     <img
-                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
-                        class="h-8 w-auto object-contain"
-                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1UyUS8nNZwkdtVupP-xXuH6zFobVxlHCSn3obuea1pKBuO6yIBN3lCdmo9TZUeqh-tEnokPjdrkUt7KCqNT6mShxKp_E0r0OiSMpZ1PMbOjejTlbSm1QI6otq2OOZ84rVdBwv_PefmG_G0F57Fz-OleOITZFIs9IAeN34PaIZs5dB33uBIe3h3dH2kARcc7DXtDb6HFHuN6dw8vBJmEclG74LtVfgSLn0qIZL0cbzTRiWUlKg2J_avcWpyX"
+                        alt="Green Health Logo"
+                        class="h-9 w-9 object-contain rounded-lg"
                     />
                     <div class="flex flex-col">
                         <span
-                            class="font-headline-sm text-headline-sm text-primary leading-none"
+                            class="font-headline-sm text-headline-sm text-primary leading-none font-bold"
                             >Green Health</span
-                        ><span class="font-label-md text-label-md text-outline"
+                        ><span
+                            class="font-label-md text-label-md text-outline mt-0.5"
                             >VitaFlow Platform</span
                         >
                     </div>
@@ -176,7 +194,7 @@
                         <a
                             class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="dashboard-tong-quan"
-                            href="tong_quan_skhoe.html"
+                            href="./tong_quan_skhoe.html"
                             ><span
                                 class="material-symbols-outlined text-primary"
                                 >monitoring</span
@@ -185,7 +203,7 @@
                             aria-current="page"
                             class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl"
                             data-path="nhat-ky-dinh-duong-ai"
-                            href="nhat_ky.html"
+                            href="./nhat_ky.html"
                             ><span
                                 class="material-symbols-outlined text-primary"
                                 >restaurant</span
@@ -193,7 +211,7 @@
                         ><a
                             class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="thuc-don-va-ke-hoach"
-                            href="thucdon.html"
+                            href="./thucdon.html"
                             ><span
                                 class="material-symbols-outlined text-primary"
                                 >calendar_month</span
@@ -201,7 +219,7 @@
                         ><a
                             class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="tu-van-chuyen-gia"
-                            href="tu_van_chuyen_gia.html"
+                            href="./tu_van_chuyen_gia.html"
                             ><span
                                 class="material-symbols-outlined text-primary"
                                 >support_agent</span
@@ -209,7 +227,7 @@
                         ><a
                             class="flex items-center gap-space-md px-space-md py-space-sm rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
                             data-path="quan-tri-co-so-du-lieu"
-                            href="quan_tri_thuc_pham.html"
+                            href="./quan_tri_thuc_pham.html"
                             ><span
                                 class="material-symbols-outlined text-primary"
                                 >database</span
@@ -243,9 +261,9 @@
             >
                 <div class="flex items-center gap-space-md">
                     <img
-                        alt="Modify the logo based on the provided annotation image {{DATA:IMAGE:IMAGE_11}}. Keep the exact same medical cross intertwined with a leaf symbol from {{DATA:IMAGE:IMAGE_10}}, but change the text underneath the logo from 'VITAFFLOW HEALTH' to 'GREEN HEALTH' as indicated in the annotation. Maintain the teal and green color scheme, clean vector style, and modern professional branding."
-                        class="h-8 w-auto object-contain"
-                        src="https://lh3.googleusercontent.com/aida/AEtjO1X7vKkwFaMlpWEmPKfRGfrV_Ab6spLZxH07YO8pLMPHou1GaQsGU-zJReEZwd8VxLGwPaZQYSdwB7U6nEdUXVYXdzi8-3By0__vAQfWaGfh21FGc7JaIC4auQZxtSBAbhAOHZj9mM4V5OTSmEZg11xEVkeX5Q1sGg5gQq_8YdIFi2U-MQA-w1rf9HjeUKJSHe6Es1AlwogcD_FkWdSkpidIHPAuOi8Zc3GUrTTr7P3n1gCvV94qd5KIZrHP"
+                        src="https://lh3.googleusercontent.com/aida/AEtjO1UyUS8nNZwkdtVupP-xXuH6zFobVxlHCSn3obuea1pKBuO6yIBN3lCdmo9TZUeqh-tEnokPjdrkUt7KCqNT6mShxKp_E0r0OiSMpZ1PMbOjejTlbSm1QI6otq2OOZ84rVdBwv_PefmG_G0F57Fz-OleOITZFIs9IAeN34PaIZs5dB33uBIe3h3dH2kARcc7DXtDb6HFHuN6dw8vBJmEclG74LtVfgSLn0qIZL0cbzTRiWUlKg2J_avcWpyX"
+                        alt="Green Health Logo"
+                        class="h-8 w-8 object-contain rounded-md"
                     /><span
                         class="font-headline-sm text-headline-sm text-on-surface"
                         >Hệ sinh thái Sức khỏe Toàn diện</span
@@ -257,7 +275,7 @@
                     >
                         <span class="material-symbols-outlined text-base"
                             >vital_signs</span
-                        ><span>TDEE: 2,150 kcal • BMI: 21.8</span>
+                        ><span class="">TDEE: 2,150 kcal • BMI: 21.8</span>
                     </div>
                     <button
                         class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center"
@@ -268,10 +286,9 @@
                             class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
                         ></span>
                     </button>
-                    <div class="flex items-center gap-space-sm pl-space-sm" id="user-profile-header">
+                    <div class="flex items-center gap-space-sm pl-space-sm">
                         <div
-                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden"
-                            id="user-avatar-container"
+                            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
                         >
                             <span
                                 class="material-symbols-outlined text-on-primary text-[18px]"
@@ -281,21 +298,12 @@
                         <div class="hidden sm:flex flex-col">
                             <span
                                 class="font-label-lg text-label-lg text-on-surface leading-tight"
-                                id="user-display-name"
                                 >Nguyễn Minh Anh</span
                             ><span
                                 class="font-label-md text-label-md text-on-surface-variant leading-tight"
-                                id="user-role-badge"
-                                >Người dùng đã xác thực</span
+                                >Gói Chăm sóc Premium</span
                             >
                         </div>
-                        <button
-                            onclick="window.APP_SUPABASE.signOutUser()"
-                            class="ml-2 p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/30 transition-colors"
-                            title="Đăng xuất"
-                        >
-                            <span class="material-symbols-outlined text-[20px]">logout</span>
-                        </button>
                     </div>
                 </div>
             </header>
@@ -346,7 +354,7 @@
                                         class="material-symbols-outlined text-primary text-[20px]"
                                         >calendar_today</span
                                     >
-                                    <span>Hôm nay, 24 Tháng 10</span>
+                                    <span class="">Hôm nay, 24 Tháng 10</span>
                                 </button>
                                 <button
                                     class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary/90 transition-all shadow-sm"
@@ -355,7 +363,7 @@
                                         class="material-symbols-outlined text-on-primary text-[20px]"
                                         >picture_as_pdf</span
                                     >
-                                    <span>Xuất báo cáo PDF</span>
+                                    <span class="">Xuất báo cáo PDF</span>
                                 </button>
                             </div>
                         </div>
@@ -585,7 +593,9 @@
                                 <div
                                     class="flex justify-between text-label-md font-label-md text-on-surface-variant mb-1.5"
                                 >
-                                    <span>Tiến độ calo trong ngày</span>
+                                    <span class=""
+                                        >Tiến độ calo trong ngày</span
+                                    >
                                     <span class="text-primary font-semibold"
                                         >71.3%</span
                                     >
@@ -1141,7 +1151,9 @@
                                             class="material-symbols-outlined text-[20px]"
                                             >add_task</span
                                         >
-                                        <span>Xác nhận thêm vào Bữa Tối</span>
+                                        <span class=""
+                                            >Xác nhận thêm vào Bữa Tối</span
+                                        >
                                     </button>
                                     <button
                                         class="w-full sm:w-auto py-space-sm px-space-md rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg hover:bg-surface-container-high transition-colors flex items-center justify-center gap-space-xs"
@@ -1150,7 +1162,9 @@
                                             class="material-symbols-outlined text-[20px]"
                                             >tune</span
                                         >
-                                        <span>Chỉnh khối lượng (g)</span>
+                                        <span class=""
+                                            >Chỉnh khối lượng (g)</span
+                                        >
                                     </button>
                                 </div>
                             </div>
@@ -1880,28 +1894,5 @@
                 </div>
             </main>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-                if (window.APP_SUPABASE && window.APP_SUPABASE.getCurrentUser) {
-                    try {
-                        const user = await window.APP_SUPABASE.getCurrentUser();
-                        if (user) {
-                            const displayName = user.user_metadata?.full_name || user.email.split("@")[0];
-                            const avatarUrl = user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}`;
-                            const nameEl = document.getElementById("user-display-name");
-                            if (nameEl) nameEl.innerText = displayName;
-                            const roleEl = document.getElementById("user-role-badge");
-                            if (roleEl) roleEl.innerText = user.email;
-                            const avatarEl = document.getElementById("user-avatar-container");
-                            if (avatarEl) {
-                                avatarEl.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="w-full h-full object-cover" />`;
-                            }
-                        }
-                    } catch (err) {
-                        console.warn("Lỗi đọc user:", err);
-                    }
-                }
-            });
-        </script>
     </body>
 </html>
